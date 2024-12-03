@@ -9,6 +9,14 @@
         .nav-link:hover {
             color: #b0b0b0 !important;
         }
+        .dropdown-menu .row { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            gap: 100px;
+        } 
+        .dropdown-menu .col-4 { 
+            flex: 0 0 auto; 
+        }
     </style>
 </head>
 <body>
@@ -22,14 +30,16 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        Torneios
                       </a>
                       <ul class="dropdown-menu border-0 container" aria-labelledby="navbarDarkDropdownMenuLink">
                         <div class="row">
-                            <li class="col-4"><a class="dropdown-item" href="#">A</a></li>
-                            <li class="col-4"><a class="dropdown-item" href="#">B</a></li>
-                            <li class="col-4"><a class="dropdown-item" href="#">C</a></li>
-                        </div>
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 1" height="100"></a></li> 
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 2" height="100"></a></li> 
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 3" height="100"></a></li> 
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 4" height="100"></a></li> 
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 5" height="100"></a></li> 
+                            <li class="col-4"><a class="dropdown-item" href="#"><img src="" alt="Image 6" height="100"></a></li>                        </div>
                       </ul>
                     </li>
                   </ul>
