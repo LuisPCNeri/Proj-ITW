@@ -15,7 +15,7 @@
             height: 70px; /* Altura fixa das imagens */
             width: auto;
             cursor: pointer;
-            margin: 0 30px; /* Espaçamento lateral entre imagens */
+            margin: 0 0; /* Espaçamento lateral entre imagens */
             transition: transform 0.2s;
         }
 
@@ -47,8 +47,7 @@
 
         /* Mostra o menu apenas ao clicar */
         .dropdown.show .dropdown-menu {
-            display: flex !important;
-            flex-wrap: wrap; /* Permite múltiplas linhas se necessário */
+            display: flex !important; 
         }
         .dropdown-menu .container{
             display: flex;
@@ -59,8 +58,8 @@
             transform: translateX(-34%);
             position: absolute;
             justify-content: center;
+            top: 0 !important;
             width: 130vh;
-            top: 100%;
             background-color: rgba(0, 0, 0, 0); 
         }
         @media (max-width: 1200px){
@@ -88,40 +87,40 @@
                         <a class="nav-link dropdown-toggle" href="#" id="tournamentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-trophy text-warning"></i> Torneios
                         </a>
-                        <ul class="dropdown-menu p-3" aria-labelledby="tournamentsDropdown">
+                        <div class="dropdown-menu p-3" aria-labelledby="tournamentsDropdown">
                             <div class="pt-5 container">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/atletismo.png" alt="Tournament 1" title="Tournament 1" class="rounded shadow-sm">
                                             <span>Atletismo</span>
                                         </a>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/basquetebol.png" alt="Tournament 2" title="Tournament 2" class="rounded shadow-sm">
                                             <span>Basquetebol</span>
                                         </a>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/canoagem.png" alt="Tournament 3" title="Tournament 3" class="rounded shadow-sm">
                                             <span>Canoagem de Velocidade</span>
                                         </a>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/ciclismo.png" alt="Tournament 4" title="Tournament 4" class="rounded shadow-sm">
                                             <span>Ciclismo de Pista</span>
                                         </a>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/futebol.png" alt="Tournament 5" title="Tournament 5" class="rounded shadow-sm">
                                             <span>Futebol</span>
                                         </a>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <a href="#">
                                             <img src="Images/natacao.png" alt="Tournament 6" title="Tournament 6" class="rounded shadow-sm">
                                             <span>Natação</span>
@@ -129,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </ul>
+                        </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">

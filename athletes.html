@@ -11,24 +11,21 @@
     <link href="StyleSheet.css" rel="stylesheet" /> 
     <style>
         .dropdown-menu {
-            display: none; /* Oculta por padrão */
+            border: 0;
+            left: 50%;
+            transform: translateX(-34%);
             position: absolute;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 15px;
-            background-color: #fff; /* Fundo branco */
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            border-radius: 0.375rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            justify-content: center; /* Centraliza os itens */
+            justify-content: center;
+            top: 0 !important;
+            width: 130vh;
+            background-color: rgba(0, 0, 0, 0); 
         }
 
         .dropdown-menu img {
             height: 70px; /* Altura fixa das imagens */
             width: auto;
             cursor: pointer;
-            margin: 0 10px; /* Espaçamento lateral entre imagens */
+            margin: 0 0; /* Espaçamento lateral entre imagens */
             transition: transform 0.2s;
         }
 
@@ -61,15 +58,19 @@
         /* Mostra o menu apenas ao clicar */
         .dropdown.show .dropdown-menu {
             display: flex !important;
-            flex-wrap: wrap; /* Permite múltiplas linhas se necessário */
+        }
+        .dropdown-menu .container{
+            display: flex;
         }
 
-        .dropdown-menu {
-            min-width: 600px; /* Garante largura mínima para o fundo */
-        }
         .navbar .nav-link.active {
             font-weight: bold; /* Aplica negrito */
             text-decoration: underline; /* Aplica sublinhado */
+        }
+        @media (max-width: 1200px){
+            .dropdown-menu{
+                transform: translateX(-47%) !important;
+            }
         }
     </style>
 </head>
@@ -91,34 +92,48 @@
                         <a class="nav-link dropdown-toggle" href="#" id="tournamentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-trophy text-warning"></i> Torneios
                         </a>
-                        <ul class="dropdown-menu p-3" aria-labelledby="tournamentsDropdown">
-                            <li class="d-flex justify-content-evenly">
-                                <a href="#">
-                                    <img src="Images/atletismo.png" alt="Tournament 1" title="Tournament 1" class="rounded shadow-sm">
-                                    <span>Atletismo</span>
-                                </a>
-                                <a href="#">
-                                    <img src="Images/basquetebol.png" alt="Tournament 2" title="Tournament 2" class="rounded shadow-sm">
-                                    <span>Basquetebol</span>
-                                </a>
-                                <a href="#">
-                                    <img src="Images/canoagem.png" alt="Tournament 3" title="Tournament 3" class="rounded shadow-sm">
-                                    <span>Canoagem de velocidade</span>
-                                </a>
-                                <a href="#">
-                                    <img src="Images/ciclismo.png" alt="Tournament 4" title="Tournament 4" class="rounded shadow-sm">
-                                    <span>Ciclismo de Pista</span>
-                                </a>
-                                <a href="#">
-                                    <img src="Images/futebol.png" alt="Tournament 5" title="Tournament 5" class="rounded shadow-sm">
-                                    <span>Futebol</span>
-                                </a>
-                                <a href="#">
-                                    <img src="Images/natacao.png" alt="Tournament 6" title="Tournament 6" class="rounded shadow-sm">
-                                    <span>Natação</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu p-3" aria-labelledby="tournamentsDropdown">
+                            <div class="pt-5 container">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/atletismo.png" alt="Tournament 1" title="Tournament 1" class="rounded shadow-sm">
+                                            <span>Atletismo</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/basquetebol.png" alt="Tournament 2" title="Tournament 2" class="rounded shadow-sm">
+                                            <span>Basquetebol</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/canoagem.png" alt="Tournament 3" title="Tournament 3" class="rounded shadow-sm">
+                                            <span>Canoagem de Velocidade</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/ciclismo.png" alt="Tournament 4" title="Tournament 4" class="rounded shadow-sm">
+                                            <span>Ciclismo de Pista</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/futebol.png" alt="Tournament 5" title="Tournament 5" class="rounded shadow-sm">
+                                            <span>Futebol</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="Images/natacao.png" alt="Tournament 6" title="Tournament 6" class="rounded shadow-sm">
+                                            <span>Natação</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
