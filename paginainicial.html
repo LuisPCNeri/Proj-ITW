@@ -10,83 +10,245 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="StyleSheet.css" rel="stylesheet" />
-    <script>
-        (function () {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme) {
-                document.documentElement.classList.add(savedTheme);
-            } else {
-                document.documentElement.classList.add("light-theme");
-            }
-        })();
-    </script>
     <style>
-        /* Temas globais */
-        body.light-theme {
-            background-color: white;
-            color: black;
+        /* Tema Claro */
+        .light-theme {
+            background-color: #ffffff;
+            color: #000000;
         }
-    
-        body.dark-theme {
-            background-color: #121212;
-            color: white;
-        }
-    
-        /* Navbar e rodapé */
-        .navbar, .navbar.fixed-bottom {
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-    
-        body.light-theme .navbar, 
-        body.light-theme .navbar.fixed-bottom {
+        .light-theme .navbar .light-theme .navbar .navbar-text{
             background-color: #f8f9fa !important;
-            color: black !important;
-            border-color: #e5e5e5 !important;
+            color: #000000 !important;
+            border-color:  #f8f9fa !important;
         }
-    
-        body.dark-theme .navbar, 
-        body.dark-theme .navbar.fixed-bottom {
-            background-color: #1c1c1c !important;
-            color: white !important;
-            border-color: #1c1c1c !important;
+        .light-theme a {
+            color: #000000;
         }
-    
-        /* Texto da navbar */
-        .navbar-text {
-            transition: color 0.3s;
+
+        /* Tema Escuro */
+        .dark-theme {
+            background-color: #121212;
+            color: #ffffff;
         }
-    
-        body.light-theme .navbar-text, 
-        body.light-theme a.nav-link {
-            color: black !important;
+        .dark-theme .navbar, .dark-theme .navbar .navbar-text{
+            background-color: #212529 !important;
+            color: #ffffff !important;
+            border-color: #212529 !important;
         }
-    
-        body.dark-theme .navbar-text, 
-        body.dark-theme a.nav-link {
-            color: white !important;
+        .dark-theme a {
+            color: #ffffff;
         }
-    
-        /* Botão e links */
-        .btn-outline-secondary, a {
-            transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+
+        /* Destaque no Hover */
+        .navbar a.nav-link:hover {
+            color: #5e5e5e !important;
+        }        
+        .navbar.fixed-bottom a:hover {
+            color: #5e5e5e !important; /* Cor destaque ao passar o mouse */
         }
-    
-        body.light-theme .btn-outline-secondary {
-            color: black;
-            border-color: black;
+
+        /* From Uiverse.io by Galahhad */ 
+        .theme-switch {
+        --toggle-size: 20px;
+        /* the size is adjusted using font-size,
+            this is not transform scale,
+            so you can choose any size */
+        --container-width: 4em;
+        --container-height: 1.5em;
+        --container-radius: 3em;
+        /* radius 0 - minecraft mode :) */
+        --container-light-bg: #3D7EAE;
+        --container-night-bg: #1D1F2C;
+        --circle-container-diameter: 2em;
+        --sun-moon-diameter: 1.5em;
+        --sun-bg: #ECCA2F;
+        --moon-bg: #C4C9D1;
+        --spot-color: #959DB1;
+        --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+        --stars-color: #fff;
+        --clouds-color: #F3FDFF;
+        --back-clouds-color: #AACADF;
+        --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
         }
-    
-        body.dark-theme .btn-outline-secondary {
-            color: white;
-            border-color: white;
+
+        .theme-switch, .theme-switch *, .theme-switch *::before, .theme-switch *::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-size: var(--toggle-size);
         }
-    
-        body.light-theme a {
-            color: black;
+
+        .theme-switch__container {
+        width: var(--container-width);
+        height: var(--container-height);
+        background-color: var(--container-light-bg);
+        border-radius: var(--container-radius);
+        overflow: hidden;
+        cursor: pointer;
+        -webkit-box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+        box-shadow: 0em -0.062em 0.062em rgba(0, 0, 0, 0.25), 0em 0.062em 0.125em rgba(255, 255, 255, 0.94);
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        transition: var(--transition);
+        position: relative;
         }
-    
-        body.dark-theme a {
-            color: white;
+
+        .theme-switch__container::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        -webkit-box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+        box-shadow: 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset, 0em 0.05em 0.187em rgba(0, 0, 0, 0.25) inset;
+        border-radius: var(--container-radius)
+        }
+
+        .theme-switch__checkbox {
+        display: none;
+        }
+
+        .theme-switch__circle-container {
+        width: var(--circle-container-diameter);
+        height: var(--circle-container-diameter);
+        background-color: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        left: var(--circle-container-offset);
+        top: var(--circle-container-offset);
+        border-radius: var(--container-radius);
+        -webkit-box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), inset 0 0 0 3.375em rgba(255, 255, 255, 0.1), 0 0 0 0.625em rgba(255, 255, 255, 0.1), 0 0 0 1.25em rgba(255, 255, 255, 0.1);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-transition: var(--circle-transition);
+        -o-transition: var(--circle-transition);
+        transition: var(--circle-transition);
+        pointer-events: none;
+        }
+
+        .theme-switch__sun-moon-container {
+        pointer-events: auto;
+        position: relative;
+        z-index: 2;
+        width: var(--sun-moon-diameter);
+        height: var(--sun-moon-diameter);
+        margin: auto;
+        border-radius: var(--container-radius);
+        background-color: var(--sun-bg);
+        -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+        box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #a1872a inset;
+        -webkit-filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+        filter: drop-shadow(0.062em 0.125em 0.125em rgba(0, 0, 0, 0.25)) drop-shadow(0em 0.062em 0.125em rgba(0, 0, 0, 0.25));
+        overflow: hidden;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        transition: var(--transition);
+        }
+
+        .theme-switch__moon {
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+        width: 100%;
+        height: 100%;
+        background-color: var(--moon-bg);
+        border-radius: inherit;
+        -webkit-box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+        box-shadow: 0.062em 0.062em 0.062em 0em rgba(254, 255, 239, 0.61) inset, 0em -0.062em 0.062em 0em #969696 inset;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        transition: var(--transition);
+        position: relative;
+        }
+
+        .theme-switch__spot {
+        position: absolute;
+        top: 0.75em;
+        left: 0.312em;
+        width: 0.75em;
+        height: 0.75em;
+        border-radius: var(--container-radius);
+        background-color: var(--spot-color);
+        -webkit-box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+        box-shadow: 0em 0.0312em 0.062em rgba(0, 0, 0, 0.25) inset;
+        }
+
+        .theme-switch__spot:nth-of-type(2) {
+        width: 0.375em;
+        height: 0.375em;
+        top: 0.937em;
+        left: 1.375em;
+        }
+
+        .theme-switch__spot:nth-last-of-type(3) {
+        width: 0.25em;
+        height: 0.25em;
+        top: 0.312em;
+        left: 0.812em;
+        }
+
+        .theme-switch__clouds {
+        width: 1.25em;
+        height: 1.25em;
+        background-color: var(--clouds-color);
+        border-radius: var(--container-radius);
+        position: absolute;
+        bottom: -0.625em;
+        left: 0.312em;
+        -webkit-box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+        box-shadow: 0.937em 0.312em var(--clouds-color), -0.312em -0.312em var(--back-clouds-color), 1.437em 0.375em var(--clouds-color), 0.5em -0.125em var(--back-clouds-color), 2.187em 0 var(--clouds-color), 1.25em -0.062em var(--back-clouds-color), 2.937em 0.312em var(--clouds-color), 2em -0.312em var(--back-clouds-color), 3.625em -0.062em var(--clouds-color), 2.625em 0em var(--back-clouds-color), 4.5em -0.312em var(--clouds-color), 3.375em -0.437em var(--back-clouds-color), 4.625em -1.75em 0 0.437em var(--clouds-color), 4em -0.625em var(--back-clouds-color), 4.125em -2.125em 0 0.437em var(--back-clouds-color);
+        -webkit-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        -o-transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        transition: 0.5s cubic-bezier(0, -0.02, 0.4, 1.25);
+        }
+
+        .theme-switch__stars-container {
+        position: absolute;
+        color: var(--stars-color);
+        top: -100%;
+        left: 0.312em;
+        width: 2.75em;
+        height: auto;
+        -webkit-transition: var(--transition);
+        -o-transition: var(--transition);
+        transition: var(--transition);
+        }
+
+        /* actions */
+
+        .theme-switch__checkbox:checked + .theme-switch__container {
+        background-color: var(--container-night-bg);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container {
+        left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container:hover {
+        left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em)
+        }
+
+        .theme-switch__circle-container:hover {
+        left: calc(var(--circle-container-offset) + 0.187em);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon {
+        -webkit-transform: translate(0);
+        -ms-transform: translate(0);
+        transform: translate(0);
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds {
+        bottom: -4.062em;
+        }
+
+        .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container {
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
         }
     
         /* Dropdown menu */
@@ -145,6 +307,103 @@
             .dropdown-menu {
                 transform: translateX(-47%) !important;
             }
+        }
+                
+        .light-theme .button {
+        line-height: 1;
+        text-decoration: none;
+        display: inline-flex;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: var(--clr);
+        color: #fff;
+        border-radius: 10rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        padding-left: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: background-color 0.3s;
+        }
+
+        .dark-theme .button {
+        line-height: 1;
+        text-decoration: none;
+        display: inline-flex;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: var(--clr);
+        color: #000000;
+        border-radius: 10rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        padding-left: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: background-color 0.3s;
+        }
+
+        .light-theme .button__icon-wrapper {
+        flex-shrink: 0;
+        width: 25px;
+        height: 25px;
+        position: relative;
+        color: var(--clr);
+        background-color: #fff;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        }
+
+        .dark-theme .button__icon-wrapper {
+        flex-shrink: 0;
+        width: 25px;
+        height: 25px;
+        position: relative;
+        color: var(--clr);
+        background-color: #000000;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        }
+
+        .light-theme .button:hover {
+        background-color: #000;
+        }
+
+        .dark-theme .button:hover {
+        background-color: #ffffff;
+        }
+
+        .dark-theme .button:hover .button__icon-wrapper {
+        color: #ffffff;
+        }
+
+        .light-theme .button:hover .button__icon-wrapper {
+        color: #000;
+        }
+
+        .button__icon-svg--copy {
+        position: absolute;
+        transform: translate(-150%, 150%);
+        }
+
+        .button:hover .button__icon-svg:first-child {
+        transition: transform 0.3s ease-in-out;
+        transform: translate(150%, -150%);
+        }
+
+        .button:hover .button__icon-svg--copy {
+        transition: transform 0.3s ease-in-out 0.1s;
+        transform: translate(0);
         }
     </style> 
 </head>
@@ -216,10 +475,27 @@
                     <li class="nav-item"><div class="nav-link" type="button" data-bs-theme-value="dark" aria-pressed="false"><i class="theme-icon fa fa-moon-o" title="Modo escuro"></i></div></li>
                 </ul>
                 <ul class="navbar-nav justify-content-end">
-                    <!-- Adição do interruptor -->
-                    <li class="nav-item">
-                        <button id="themeToggle" class="btn btn-outline-secondary">Alternar Tema</button>
-                    </li>
+                    <!-- Adição do interruptor --> 
+                    <label class="theme-switch">
+                      <input type="checkbox" class="theme-switch__checkbox" id="themeSwitcher">
+                      <div class="theme-switch__container">
+                        <div class="theme-switch__clouds"></div>
+                        <div class="theme-switch__stars-container">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z" fill="currentColor"></path>
+                          </svg>
+                        </div>
+                        <div class="theme-switch__circle-container">
+                          <div class="theme-switch__sun-moon-container">
+                            <div class="theme-switch__moon">
+                              <div class="theme-switch__spot"></div>
+                              <div class="theme-switch__spot"></div>
+                              <div class="theme-switch__spot"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
                 </ul>
             </div>
         </div>
@@ -262,8 +538,18 @@
         <p>Jogos Olímpicos de Verão de 2024 (em francês: Les Jeux olympiques d'été de 2024), oficialmente denominados Jogos da XXXIII Olimpíada (em francês: Jeux de la XXXIIIe Olympiade) e comumente conhecidos como Paris 2024, foi um evento multiesportivo internacional realizado de 26 de julho (data da cerimônia de abertura) a 11 de agosto de 2024 na França, com Paris como principal cidade anfitriã e 16 outras cidades espalhadas pela França Metropolitana, além de uma subsede no Taiti — uma ilha dentro do país ultramarino francês e da coletividade ultramarina da Polinésia Francesa.
             A cidade de Paris foi escolhida como sede na 131.ª Sessão do Comitê Olímpico Internacional (COI) em Lima, Peru, em 13 de setembro de 2017. Após múltiplas desistências que deixaram apenas Paris e Los Angeles na disputa, o COI aprovou um processo para defini-las como locais de realização dos Jogos de 2024 e 2028 respectivamente. Tendo anteriormente sediado os Jogos de 1900 e de 1924, Paris se tornará a segunda cidade, depois de Londres (que foi a anfitriã em 1908, 1948 e 2012), a sediar três vezes os Jogos Olímpicos de Verão. Paris 2024 também marca o centenário de Paris 1924, e estes Jogos Olímpicos são os sextos organizados pela França (três de verão e três de inverno), e os primeiros Jogos Olímpicos franceses desde os Jogos Olímpicos de Inverno de 1992 em Albertville. Em 2024 os Jogos Olímpicos de Verão retornam ao tradicional ciclo olímpico de quatro anos, já que os Jogos de 2020, em Tóquio, foram adiados em um ano devido à pandemia de COVID-19.       
             Os Jogos de 2024 contam com a estreia do breakdance como evento olímpico, e serão os últimos Jogos Olímpicos realizados durante a gestão do COI pelo presidente Thomas Bach. Os Jogos tinham a expectativa de serem os primeiros a contar com número idêntico de atletas entre homens e mulheres, mas após a lista final de inscritos os homens devem contar com uma quantidade superior de competidores. As Olimpíadas de Paris custaram cerca de 9 bilhões de euros</p>
-
-        <a href="https://pt.wikipedia.org/wiki/Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2024" target="_blank" title="Ver mais">Saber mais</a>
+        <button class="light-theme button" style="--clr: #7808d0" onclick="window.location.href='https://pt.wikipedia.org/wiki/Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2024';">
+        <span class="button__icon-wrapper">
+            <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__icon-svg" width="10">
+                <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z" fill="currentColor"></path>
+            </svg>
+            
+            <svg viewBox="0 0 14 15" fill="none" width="10" xmlns="http://www.w3.org/2000/svg" class="button__icon-svg button__icon-svg--copy">
+                <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z" fill="currentColor"></path>
+            </svg>
+        </span>
+        Saber mais
+        </button>
     </div>
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
@@ -277,29 +563,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const themeToggle = document.getElementById("themeToggle");
-            const body = document.body;
-    
-            // Verificar e aplicar o tema salvo no localStorage
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme) {
-                body.classList.remove("light-theme", "dark-theme");
-                body.classList.add(savedTheme);
+        // Função para alternar o tema
+        const themeSwitcher = document.getElementById('themeSwitcher');
+        const body = document.body;
+
+        // Aplica o tema armazenado no localStorage ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            const storedTheme = localStorage.getItem('theme') || 'light'; // Padrão: 'light'
+            if (storedTheme === 'dark') {
+                body.classList.add('dark-theme');
+                themeSwitcher.checked = true; // Atualiza o estado do checkbox
+            } else {
+                body.classList.add('light-theme');
             }
-    
-            themeToggle.addEventListener("click", () => {
-                if (body.classList.contains("light-theme")) {
-                    body.classList.remove("light-theme");
-                    body.classList.add("dark-theme");
-                    localStorage.setItem("theme", "dark-theme"); // Salvar preferência
-                } else {
-                    body.classList.remove("dark-theme");
-                    body.classList.add("light-theme");
-                    localStorage.setItem("theme", "light-theme"); // Salvar preferência
-                }
-            });
         });
+
+        // Alterna o tema e armazena a preferência no localStorage
+        themeSwitcher.addEventListener('change', () => {
+            if (themeSwitcher.checked) {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark'); // Armazena o tema
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light'); // Armazena o tema
+            }
+        });    
     </script>
-    </body>
+</body>
 </html>
