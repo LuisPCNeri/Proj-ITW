@@ -41,7 +41,7 @@ main {
 -----------------------------*/
 
 /* Destaque no Hover */
-.navbar a.nav-link:hover {
+.navbar a.nav-link:hover:not(.active) {
     color: #5e5e5e !important;
 }        
 .navbar.fixed-bottom a:hover {
@@ -52,9 +52,9 @@ main {
 .dropdown-menu img {
     height: 70px; /* Altura fixa das imagens */
     width: auto;
-        cursor: pointer;
-        margin: 0 0; /* Espaçamento lateral entre imagens */
-        transition: transform 0.2s;
+    cursor: pointer;
+    margin: 0 0; /* Espaçamento lateral entre imagens */
+    transition: transform 0.2s;
 }
 .dropdown-menu a:hover img {
     transform: scale(1.1); /* Efeito hover */
@@ -63,7 +63,7 @@ main {
 .dropdown-menu a {
     position: relative;
     display: inline-block;
-    }    
+}    
 .dropdown-menu a span {
     position: absolute;
     top: 50%;
@@ -94,6 +94,18 @@ main {
 
 .dropdown-menu .container{
     display: flex;
+}
+
+.light-theme .dropdown-menu .row {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dark-theme .dropdown-menu .row {
+    background-color: #212529;
+    padding: 10px;
+    border-radius: 5px;
 }
 
     
