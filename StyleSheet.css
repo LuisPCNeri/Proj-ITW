@@ -37,3 +37,68 @@ main {
     line-height: 1.5;
     border-radius: 3px;
 }
+/*nav
+-----------------------------*/
+
+/* Destaque no Hover */
+.navbar a.nav-link:hover {
+    color: #5e5e5e !important;
+}        
+.navbar.fixed-bottom a:hover {
+    color: #5e5e5e !important; /* Cor destaque ao passar o mouse */
+}
+
+/* Dropdown menu */
+.dropdown-menu img {
+    height: 70px; /* Altura fixa das imagens */
+    width: auto;
+        cursor: pointer;
+        margin: 0 0; /* Espaçamento lateral entre imagens */
+        transition: transform 0.2s;
+}
+.dropdown-menu a:hover img {
+    transform: scale(1.1); /* Efeito hover */
+    filter: brightness(50%);
+}    
+.dropdown-menu a {
+    position: relative;
+    display: inline-block;
+    }    
+.dropdown-menu a span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+    text-align: center;
+}
+    
+.dropdown-menu a:hover span {
+    display: block; /* Mostra o texto no hover */
+}
+    
+/* Responsividade para dropdown */
+.dropdown-menu {
+    border: 0;
+    left: 50%;
+    transform: translateX(-34%);
+    position: absolute;
+    justify-content: center;
+    top: 0 !important;
+    width: 130vh;
+    background-color: rgba(0, 0, 0, 0); 
+}
+
+.dropdown-menu .container{
+    display: flex;
+}
+
+    
+@media (max-width: 1200px) {
+    .dropdown-menu {
+        transform: translateX(-47%) !important;
+    }
+}
