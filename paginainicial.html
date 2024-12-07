@@ -327,6 +327,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         transition: background-color 0.3s;
+        margin-bottom: 10px;
         }
 
         .dark-theme .button {
@@ -347,6 +348,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         transition: background-color 0.3s;
+        margin-bottom: 10px;
         }
 
         .light-theme .button__icon-wrapper {
@@ -404,6 +406,85 @@
         .button:hover .button__icon-svg--copy {
         transition: transform 0.3s ease-in-out 0.1s;
         transform: translate(0);
+        }
+
+        .card {
+        width: 300px;
+        height: 200px;
+        perspective: 1000px;
+        background-color: inherit;
+        border-style: none;
+        }
+
+        .card-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.999s;
+        }
+
+        .card:hover .card-inner {
+        transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        }
+
+        .card-front {
+        background-color: #6A2C70;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        border: 10px solid #6A2C70;
+        border-radius: 10px;
+        justify-content: center;
+        font-size: 24px;
+        transform: rotateY(0deg);
+        }
+
+        .card-back {
+        background-color: #F08A5D;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        border: 10px solid #F08A5D;
+        border-radius: 10px;
+        justify-content: center;
+        font-size: 24px;
+        transform: rotateY(180deg);
+        }
+
+        .card-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .card-row:nth-child(even) {
+            flex-direction: row-reverse; /* Inverte alinhamento para linhas pares */
+        }
+
+        .card-row .text {
+            flex: 1;
+            margin-right: 30px;
+            text-indent: 20px;
+        }
+
+        .card-row:nth-child(even) .text {
+            margin-left: 30px;
+            margin-right: 0;
+        }
+        
+        .card-row .card {
+            flex: 0 0 300px; /* Largura fixa para os cards */
+            margin: 0;
         }
     </style> 
 </head>
@@ -535,9 +616,51 @@
 
     <div class="container-lg">
         <h2 class="py-2 mb-2 border-bottom" id="gettingStartedTitle">Jogos Olímpicos de Verão de 2024</h2>
-        <p>Jogos Olímpicos de Verão de 2024 (em francês: Les Jeux olympiques d'été de 2024), oficialmente denominados Jogos da XXXIII Olimpíada (em francês: Jeux de la XXXIIIe Olympiade) e comumente conhecidos como Paris 2024, foi um evento multiesportivo internacional realizado de 26 de julho (data da cerimônia de abertura) a 11 de agosto de 2024 na França, com Paris como principal cidade anfitriã e 16 outras cidades espalhadas pela França Metropolitana, além de uma subsede no Taiti — uma ilha dentro do país ultramarino francês e da coletividade ultramarina da Polinésia Francesa.
-            A cidade de Paris foi escolhida como sede na 131.ª Sessão do Comitê Olímpico Internacional (COI) em Lima, Peru, em 13 de setembro de 2017. Após múltiplas desistências que deixaram apenas Paris e Los Angeles na disputa, o COI aprovou um processo para defini-las como locais de realização dos Jogos de 2024 e 2028 respectivamente. Tendo anteriormente sediado os Jogos de 1900 e de 1924, Paris se tornará a segunda cidade, depois de Londres (que foi a anfitriã em 1908, 1948 e 2012), a sediar três vezes os Jogos Olímpicos de Verão. Paris 2024 também marca o centenário de Paris 1924, e estes Jogos Olímpicos são os sextos organizados pela França (três de verão e três de inverno), e os primeiros Jogos Olímpicos franceses desde os Jogos Olímpicos de Inverno de 1992 em Albertville. Em 2024 os Jogos Olímpicos de Verão retornam ao tradicional ciclo olímpico de quatro anos, já que os Jogos de 2020, em Tóquio, foram adiados em um ano devido à pandemia de COVID-19.       
-            Os Jogos de 2024 contam com a estreia do breakdance como evento olímpico, e serão os últimos Jogos Olímpicos realizados durante a gestão do COI pelo presidente Thomas Bach. Os Jogos tinham a expectativa de serem os primeiros a contar com número idêntico de atletas entre homens e mulheres, mas após a lista final de inscritos os homens devem contar com uma quantidade superior de competidores. As Olimpíadas de Paris custaram cerca de 9 bilhões de euros</p>
+        <div class="card-row">
+            <div class="text">
+                <p>Jogos Olímpicos de Verão de 2024 (em francês: Les Jeux olympiques d'été de 2024), oficialmente denominados Jogos da XXXIII Olimpíada (em francês: Jeux de la XXXIIIe Olympiade) e comumente conhecidos como Paris 2024, foi um evento multiesportivo internacional realizado de 26 de julho (data da cerimônia de abertura) a 11 de agosto de 2024 na França, com Paris como principal cidade anfitriã e 16 outras cidades espalhadas pela França Metropolitana, além de uma subsede no Taiti — uma ilha dentro do país ultramarino francês e da coletividade ultramarina da Polinésia Francesa.</p>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <p>Front Side</p>
+                    </div>
+                    <div class="card-back">
+                        <p>Back Side</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-row">
+            <div class="text">
+                <p>A cidade de Paris foi escolhida como sede na 131.ª Sessão do Comitê Olímpico Internacional (COI) em Lima, Peru, em 13 de setembro de 2017. Após múltiplas desistências que deixaram apenas Paris e Los Angeles na disputa, o COI aprovou um processo para defini-las como locais de realização dos Jogos de 2024 e 2028 respectivamente. Tendo anteriormente sediado os Jogos de 1900 e de 1924, Paris se tornará a segunda cidade, depois de Londres (que foi a anfitriã em 1908, 1948 e 2012), a sediar três vezes os Jogos Olímpicos de Verão. Paris 2024 também marca o centenário de Paris 1924, e estes Jogos Olímpicos são os sextos organizados pela França (três de verão e três de inverno), e os primeiros Jogos Olímpicos franceses desde os Jogos Olímpicos de Inverno de 1992 em Albertville. Em 2024 os Jogos Olímpicos de Verão retornam ao tradicional ciclo olímpico de quatro anos, já que os Jogos de 2020, em Tóquio, foram adiados em um ano devido à pandemia de COVID-19.</p>       
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <p>Front Side</p>
+                    </div>
+                    <div class="card-back">
+                        <p>Back Side</p>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="card-row">
+            <div class="text">           
+                <p>Os Jogos de 2024 contam com a estreia do breakdance como evento olímpico, e serão os últimos Jogos Olímpicos realizados durante a gestão do COI pelo presidente Thomas Bach. Os Jogos tinham a expectativa de serem os primeiros a contar com número idêntico de atletas entre homens e mulheres, mas após a lista final de inscritos os homens devem contar com uma quantidade superior de competidores. As Olimpíadas de Paris custaram cerca de 9 bilhões de euros.</p>
+            </div>    
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <p>Front Side</p>
+                    </div>
+                    <div class="card-back">
+                        <p>Back Side</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <button class="light-theme button" style="--clr: #7808d0" onclick="window.location.href='https://pt.wikipedia.org/wiki/Jogos_Ol%C3%ADmpicos_de_Ver%C3%A3o_de_2024';">
         <span class="button__icon-wrapper">
             <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__icon-svg" width="10">
