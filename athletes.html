@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="StyleSheet.css" rel="stylesheet" />
-    <link href="theme_switch.css" rel="stylesheet" /> 
+    <link href="theme_switch.css" rel="stylesheet" />
+    <script src="athletes.js"></script>
     <style>
         .dark-theme .navbar .nav-item .active{
             color: #ffffff !important;
@@ -85,6 +86,18 @@
             display: flex;
         }
 
+        .dark-theme .pagination .page-item .page-link {
+            background-color: #333; /* Fundo escuro */
+            color: #fff; /* Texto branco */
+            border: 1px solid #444; /* Borda escura */
+        }
+
+        .dark-theme .pagination .page-item .page-link:hover {
+            background-color: #444; /* Fundo ligeiramente mais claro ao passar o mouse */
+            color: #ccd1ff; /* Texto branco */
+            border-color: #555; /* Borda ajustada */
+        }
+        
         /* Responsividade para dispositivos móveis */
         @media (max-width: 768px) {
             h2 {
@@ -209,12 +222,12 @@
                     </h2>
                 </div>
                 <div class="col-md-4">
-                    <form>
+                    <form onsubmit="return false;">
                         <input type="hidden" name="page" value="1">
                         <div class="input-group input-group-sm flex">
                             <input class="form-control form-control-sm" type="text" name="q" placeholder="Insira o nome ou acrônimo">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-default btn-sm" title="Filtrar">
+                                <button type="button" class="btn btn-default btn-sm" title="Filtrar">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                                 <a href="/Paris2024/Athletes" class="btn btn-default btn-sm" title="Limpar o filtro">
@@ -226,20 +239,65 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-sm align-middle mt-2">
+        <div class="row small">
+            <p class="col-4 mr-auto pt-2">
+                <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
+                <span data-bind="html: 'Athletes: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+            </p>
+                        <!-- Ponto de alteração: Paginação corrigida -->
+            <div class="col-8 my-0 pt-3">
+                <ul class="pagination float-end">
+                    <!-- Botão para a primeira página -->
+                    <li class="page-item" data-bind="css: { disabled: currentPage() === 1 }">
+                        <a class="page-link" href="#" data-bind="click: function() { activate(1); }">Primeiro</a>
+                    </li>
+                    <!-- Botão para a página anterior -->
+                    <li class="page-item" data-bind="css: { disabled: !hasPrevious() }">
+                        <a class="page-link" href="#" data-bind="click: function() { activate(previousPage()); }">Anterior</a>
+                    </li>
+                    <li class="page-item" data-bind="foreach: pageArray">
+                        <a class="page-link" href="#" data-bind="text: $data, click: function() { activate($data); }, css: { active: $data === currentPage() }"></a>
+                    </li>                    
+                    <!-- Botão para a próxima página -->
+                    <li class="page-item" data-bind="css: { disabled: !hasNext() }">
+                        <a class="page-link" href="#" data-bind="click: function() { activate(nextPage()); }">Próximo</a>
+                    </li>
+                    <!-- Botão para a última página -->
+                    <li class="page-item" data-bind="css: { disabled: currentPage() === totalPages() }">
+                        <a class="page-link" href="#" data-bind="click: function() { activate(totalPages()); }">Último</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-striped table-sm small">
             <thead class="table-secondary">
                 <tr>
-                    <th>Nome</th>
-                    <th>Nome reduzido</th>
-                    <th>Nome (TV)</th>
-                    <th>Sexo</th>
-                    <th>Nacionalidade(s)</th>
-                    <th>País que representa</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">Birth Place</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-bind="foreach: athletes">
+                <tr>
+                    <td class="align-middle" data-bind="text:Id"></td>
+                    <td class="align-middle" data-bind="text:Name"></td>
+                    <td class="align-middle" data-bind="text:BirthDate"></td>
+                    <td class="align-middle" data-bind="text:BirthPlace"></td>
+                    <td class="align-middle" data-bind="text:Sex"></td>
+                    <td class="text-end">
+                        <a class="btn btn-default btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
+                            <i class="fa fa-eye" title="Show details"></i>
+                        </a>
+                        <button class="btn btn-default btn-xs">
+                            <i class="fa-regular fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i>
+                        </button>
+                    </td>
+                </tr>
             </tbody>
-        </table>        
+        </table>
     </div>
         <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
@@ -253,5 +311,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="theme_switch.js"></script>
+    <script src="athletes.js"></script>
 </body>
 </html>
