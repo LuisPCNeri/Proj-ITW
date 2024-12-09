@@ -285,12 +285,8 @@
                     <td class="align-middle" data-bind="text:Function"></td>
                     <td class="align-middle" data-bind="text:Sex"></td>
                     <td class="text-end">
-                        <a class="btn btn-default btn-xs" data-bind="attr: { href:'./coachesDetails.html?id=' + Id }">
-                            <i class="fa fa-eye" title="Show details"></i>
-                        </a>
-                        <button class="btn btn-default btn-xs">
-                            <i class="fa-regular fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i>
-                        </button>
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./coachesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
+                        <button class="btn btn-default btn-xs"><i class="fa fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
                     </td>
                 </tr>
             </tbody>
