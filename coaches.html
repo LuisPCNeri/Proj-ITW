@@ -241,7 +241,7 @@
         <div class="row small">
             <p class="col-4 mr-auto pt-2">
                 <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                <span data-bind="html: 'Athletes: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                <span data-bind="html: 'Coaches: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
                         <!-- Ponto de alteração: Paginação corrigida -->
             <div class="col-8 my-0 pt-3">
@@ -280,10 +280,10 @@
             </thead>
             <tbody data-bind="foreach: coaches">
                 <tr>
-                    <td class="align-middle" data-bind="text:Id"></td>
-                    <td class="align-middle" data-bind="text:Name"></td>
-                    <td class="align-middle" data-bind="text:Function"></td>
-                    <td class="align-middle" data-bind="text:Sex"></td>
+                    <td class="align-middle" data-bind="text: Id"></td>
+                    <td class="align-middle" data-bind="text: Name"></td>
+                    <td class="align-middle" data-bind="text: Function"></td>
+                    <td class="align-middle" data-bind="text: Sex"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-xs" data-bind="attr: { href:'./coachesDetails.html?id=' + Id }">
                             <i class="fa fa-eye" title="Show details"></i>
