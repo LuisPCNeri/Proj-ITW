@@ -84,7 +84,7 @@ main {
 .dropdown-menu {
     border: 0;
     left: 50%;
-    transform: translateX(-34%);
+    transform: translateX(-21%);
     position: absolute;
     justify-content: center;
     top: 0 !important;
