@@ -31,13 +31,6 @@ var vm = function () {
             self.BirthDate(data.BirthDate.split('T')[0]);
             self.BirthPlace(data.BirthPlace);
             self.Photo(data.Photo);
-            if (data.Philosophy != "") {
-                self.Philosophy(data.Philosophy.match(/".*?"/));
-            }
-            else {
-                self.Philosophy = "";
-            }
-            
         });
     };
 

@@ -27,13 +27,6 @@ var vm = function () {
             self.Sex(data.Sex);
             self.Function(data.Function);
             self.Photo(data.Photo);
-            if (data.Philosophy != "") {
-                self.Philosophy(data.Philosophy.match(/".*?"/));
-            }
-            else {
-                self.Philosophy = "";
-            }
-            
         });
     };
 
