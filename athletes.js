@@ -8,8 +8,8 @@
     self.passingMessage = ko.observable('');
     self.athletes = ko.observableArray([]); // Lista de atletas
     self.currentPage = ko.observable(1);
-    self.pagesize = ko.observable(50);
-    self.totalRecords = ko.observable(0); // Atualizado para garantir que recebe corretamente o total de registros
+    self.pagesize = ko.observable(20);
+    self.totalRecords = ko.observable(50); // Atualizado para garantir que recebe corretamente o total de registros
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
 
@@ -22,21 +22,29 @@
     }, self);
 
     self.fromRecord = ko.computed(function () {
-        return (self.currentPage() - 1) * self.pagesize() + 1;
-    });
+        return self.previousPage() * self.pagesize() + 1;
+    }, self);
 
     self.toRecord = ko.computed(function () {
         return Math.min(self.currentPage() * self.pagesize(), self.totalRecords());
-    });
+    }, self);
     
     self.totalPages = ko.observable(0);
 
     self.pageArray = ko.computed(function () {
-        let pages = [];
-        for (let i = 1; i <= self.totalPages(); i++) {
-            pages.push(i);
-        }
-        return pages;
+        var list = [];
+        var size = Math.min(self.totalPages(), 9);
+        var step;
+        if (size < 9 || self.currentPage() === 1)
+            step = 0;
+        else if (self.currentPage() >= self.totalPages() - 4)
+            step = self.totalPages() - 9;
+        else
+            step = Math.max(self.currentPage() - 5, 0);
+
+        for (var i = 1; i <= size; i++)
+            list.push(i + step);
+        return list;
     });
 
     //--- Página atual
