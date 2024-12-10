@@ -1,77 +1,47 @@
-// ViewModel KnockOut
 var vm = function () {
-    console.log('ViewModel initiated...');
-    //---Variáveis locais
     var self = this;
+
     self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Swimmings/Events');
-    self.displayName = 'Paris2024 Athletes List';
-    self.error = ko.observable('');
-    self.passingMessage = ko.observable('');
-    self.currentPage = ko.observable(1);
-    self.events = ko.observableArray([]); // Lista de eventos
-    self.stages = ko.observableArray([]); // Lista de fases
-    self.selectedEventId = ko.observable(''); // ID do evento selecionado
-    self.pagesize = ko.observable(20);
-    self.totalRecords = ko.observable(50);
-    self.hasPrevious = ko.observable(false);
-    self.hasNext = ko.observable(false);
-    self.previousPage = ko.computed(function () {
-        return self.currentPage() * 1 - 1;
-    }, self);
-    self.nextPage = ko.computed(function () {
-        return self.currentPage() * 1 + 1;
-    }, self);
-    self.fromRecord = ko.computed(function () {
-        return self.previousPage() * self.pagesize() + 1;
-    }, self);
-    self.toRecord = ko.computed(function () {
-        return Math.min(self.currentPage() * self.pagesize(), self.totalRecords());
-    }, self);
-    self.totalPages = ko.observable(0);
-    self.pageArray = function () {
-        var list = [];
-        var size = Math.min(self.totalPages(), 9);
-        var step;
-        if (size < 9 || self.currentPage() === 1)
-            step = 0;
-        else if (self.currentPage() >= self.totalPages() - 4)
-            step = self.totalPages() - 9;
-        else
-            step = Math.max(self.currentPage() - 5, 0);
+    self.resultUri = ko.observable('http://192.168.160.58/Paris2024/api/Swimmings');
+    self.events = ko.observableArray([]);
+    self.stages = ko.observableArray([]);
+    self.results = ko.observableArray([]);
+    self.selectedEventId = ko.observable('');
+    self.selectedStageId = ko.observable('');
 
-        for (var i = 1; i <= size; i++)
-            list.push(i + step);
-        return list;
-    };
-
-    //--- Page Events
-    self.activate = function (id) {
-        console.log('CALL: getAthletes...');
-        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
-        ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
-            hideLoading();
-            self.currentPage(data.CurrentPage);
-            self.hasNext(data.HasNext);
-            self.hasPrevious(data.HasPrevious);
-            self.pagesize(data.PageSize)
-            self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalAhletes);
-            self.events(data); // Carrega eventos no `select`
-            self.selectedEventId(data[0]?.EventId || ''); // Seleciona o primeiro evento como padrão
-            //self.SetFavourites();
+    self.activate = function () {
+        ajaxHelper(self.baseUri(), 'GET').done(function (data) {
+            self.events(data);
+            if (data.length > 0) {
+                self.selectedEventId(data[0].EventId);
+            }
         });
     };
 
     self.selectedEventId.subscribe(function (newEventId) {
-        console.log('Evento selecionado:', newEventId);
         const selectedEvent = self.events().find(event => event.EventId === newEventId);
-        self.stages(selectedEvent ? selectedEvent.Stages : []); // Atualiza a tabela de fases
+        if (selectedEvent) {
+            self.stages(selectedEvent.Stages);
+            self.selectedStageId(selectedEvent.Stages[0]?.StageId || '');
+        } else {
+            self.stages([]);
+            self.results([]);
+        }
     });
 
-    //--- Internal functions
+    self.selectedStageId.subscribe(function (newStageId) {
+        if (newStageId) {
+            const eventId = self.selectedEventId();
+            const uri = `${self.resultUri()}?EventId=${eventId}&StageId=${newStageId}`;
+            ajaxHelper(uri, 'GET').done(function (data) {
+                self.results(data);
+            });
+        } else {
+            self.results([]);
+        }
+    });
+
     function ajaxHelper(uri, method, data) {
-        self.error(''); // Clear error message
         return $.ajax({
             type: method,
             url: uri,
@@ -86,11 +56,6 @@ var vm = function () {
         });
     }
 
-    function sleep(milliseconds) {
-        const start = Date.now();
-        while (Date.now() - start < milliseconds);
-    }
-
     function showLoading() {
         $("#myModal").modal('show', {
             backdrop: 'static',
@@ -103,35 +68,11 @@ var vm = function () {
         })
     }
 
-    function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-            sURLVariables = sPageURL.split('&'),
-            sParameterName,
-            i;
-        console.log("sPageURL=", sPageURL);
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-    };
-
-    //--- start ....
+    self.activate();
     showLoading();
-    var pg = getUrlParameter('page');
-    console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
-    }
-    console.log("VM initialized!");
 };
 
 $(document).ready(function () {
-    console.log("ready!");
     ko.applyBindings(new vm());
 });
 
