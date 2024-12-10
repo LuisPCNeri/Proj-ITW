@@ -1,108 +1,77 @@
+// ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
+    //---Variáveis locais
     var self = this;
-
-    // Propriedades Observáveis
     self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Swimmings/Events');
-    self.displayName = 'Natação - Lista de provas';
+    self.displayName = 'Paris2024 Athletes List';
     self.error = ko.observable('');
-    self.Matches = ko.observableArray([]);
-    self.visibleMatches = ko.observableArray([]);
+    self.passingMessage = ko.observable('');
     self.currentPage = ko.observable(1);
-    self.itemsPerPage = 20;
-    self.itemInicialOnPage = ko.observable(1);
-    self.itemFinalOnPage = ko.observable(20);
+    self.events = ko.observableArray([]); // Lista de eventos
+    self.stages = ko.observableArray([]); // Lista de fases
+    self.selectedEventId = ko.observable(''); // ID do evento selecionado
+    self.pagesize = ko.observable(20);
+    self.totalRecords = ko.observable(50);
+    self.hasPrevious = ko.observable(false);
+    self.hasNext = ko.observable(false);
+    self.previousPage = ko.computed(function () {
+        return self.currentPage() * 1 - 1;
+    }, self);
+    self.nextPage = ko.computed(function () {
+        return self.currentPage() * 1 + 1;
+    }, self);
+    self.fromRecord = ko.computed(function () {
+        return self.previousPage() * self.pagesize() + 1;
+    }, self);
+    self.toRecord = ko.computed(function () {
+        return Math.min(self.currentPage() * self.pagesize(), self.totalRecords());
+    }, self);
+    self.totalPages = ko.observable(0);
+    self.pageArray = function () {
+        var list = [];
+        var size = Math.min(self.totalPages(), 9);
+        var step;
+        if (size < 9 || self.currentPage() === 1)
+            step = 0;
+        else if (self.currentPage() >= self.totalPages() - 4)
+            step = self.totalPages() - 9;
+        else
+            step = Math.max(self.currentPage() - 5, 0);
 
-    // Propriedades adicionadas para armazenar eventos
-    self.events = ko.observableArray([]); // **Nova propriedade para armazenar eventos completos**
-    self.eventIds = ko.observableArray([]); // **Mantido para compatibilidade**
-    self.stageIds = ko.observableArray(['', 'STAGE1', 'STAGE2', 'STAGE3']);
-
-    // Propriedades para EventId e StageId
-    self.selectedEventId = ko.observable(''); // Inicializado vazio para evitar inconsistências
-    self.selectedStageId = ko.observable('');
-
-    // Cálculo do Total de Páginas
-    self.totalPages = ko.computed(() => Math.ceil(self.Matches().length / self.itemsPerPage));
-
-    // Gerar Lista de Páginas
-    self.pages = ko.computed(() => Array.from({ length: self.totalPages() }, (_, i) => i + 1));
-
-    // Atualizar os Itens Visíveis
-    self.updateVisibleMatches = function () {
-        const startIndex = (self.currentPage() - 1) * self.itemsPerPage;
-        const endIndex = startIndex + self.itemsPerPage;
-        self.visibleMatches(self.Matches().slice(startIndex, endIndex));
+        for (var i = 1; i <= size; i++)
+            list.push(i + step);
+        return list;
     };
 
-    // Navegação: Ir para uma Página Específica
-    self.goToPage = function (page) {
-        if (page >= 1 && page <= self.totalPages()) {
-            self.currentPage(page);
-            self.itemInicialOnPage((page * self.itemsPerPage) - (self.itemsPerPage - 1));
-            self.itemFinalOnPage(Math.min(page * self.itemsPerPage, self.Matches().length));
-            self.updateVisibleMatches();
-        }
+    //--- Page Events
+    self.activate = function (id) {
+        console.log('CALL: getAthletes...');
+        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalAhletes);
+            self.events(data); // Carrega eventos no `select`
+            self.selectedEventId(data[0]?.EventId || ''); // Seleciona o primeiro evento como padrão
+            //self.SetFavourites();
+        });
     };
 
-    // Navegação: Página Anterior
-    self.prevPage = function () {
-        if (self.currentPage() > 1) {
-            self.goToPage(self.currentPage() - 1);
-        }
-    };
+    self.selectedEventId.subscribe(function (newEventId) {
+        console.log('Evento selecionado:', newEventId);
+        const selectedEvent = self.events().find(event => event.EventId === newEventId);
+        self.stages(selectedEvent ? selectedEvent.Stages : []); // Atualiza a tabela de fases
+    });
 
-    // Navegação: Próxima Página
-    self.nextPage = function () {
-        if (self.currentPage() < self.totalPages()) {
-            self.goToPage(self.currentPage() + 1);
-        }
-    };
-
-    // Carregar Eventos da API
-    self.loadEvents = function () { // **Nova função para carregar eventos**
-        const uri = self.baseUri().replace('Swimmings?EventId=', 'Events'); // **Ajuste no endpoint**
-        console.log('Fetching events from:', uri);
-        ajaxHelper(uri, 'GET')
-            .done(function (data) {
-                console.log('Events received:', data);
-                self.events(data); // **Armazena os eventos completos**
-                self.eventIds(data.map(event => event.EventId)); // Atualiza os EventIds para compatibilidade
-                self.selectedEventId(data[0]?.EventId || ''); // Define o primeiro evento como selecionado
-            })
-            .fail(function (error) {
-                console.error('Error fetching events:', error);
-            });
-    };
-
-    // Atualizar Dados ao Selecionar Novo EventId ou StageId
-    self.loadMatches = function () {
-        console.log('CALL: getMatches...');
-        const composedUri =
-            self.baseUri() +
-            self.selectedEventId() +
-            '&stageId=' +
-            self.selectedStageId(); // Incluindo o stageId
-
-        console.log('Fetching data from:', composedUri);
-        showLoading();
-        ajaxHelper(composedUri, 'GET')
-            .done(function (data) {
-                console.log('Data received:', data);
-                hideLoading();
-                self.Matches(data);
-                self.currentPage(1); // Reiniciar para a primeira página
-                self.updateVisibleMatches();
-            })
-            .fail(function (error) {
-                console.log('Error fetching data:', error);
-                hideLoading();
-            });
-    };
-
-    // Função AJAX
+    //--- Internal functions
     function ajaxHelper(uri, method, data) {
-        self.error(''); // Limpar mensagens de erro
+        self.error(''); // Clear error message
         return $.ajax({
             type: method,
             url: uri,
@@ -117,34 +86,55 @@ var vm = function () {
         });
     }
 
-    // Funções Auxiliares para Exibir/Esconder Carregamento
+    function sleep(milliseconds) {
+        const start = Date.now();
+        while (Date.now() - start < milliseconds);
+    }
+
     function showLoading() {
         $("#myModal").modal('show', {
             backdrop: 'static',
             keyboard: false
         });
     }
-
     function hideLoading() {
-        $("#myModal").modal('hide');
+        $('#myModal').on('shown.bs.modal', function (e) {
+            $("#myModal").modal('hide');
+        })
     }
 
-    // Inicializar
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        console.log("sPageURL=", sPageURL);
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    //--- start ....
     showLoading();
-    self.loadEvents(); // **Carregar eventos ao inicializar**
-    self.loadMatches(); // **Mantido para carregar partidas**
-    console.log("ViewModel initialized!");
+    var pg = getUrlParameter('page');
+    console.log(pg);
+    if (pg == undefined)
+        self.activate(1);
+    else {
+        self.activate(pg);
+    }
+    console.log("VM initialized!");
 };
 
-// Inicializar Knockout e Tema Claro/Escuro
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
+    console.log("ready!");
     ko.applyBindings(new vm());
 });
 
-$(document).ready(function () {
-    console.log("Document ready!");
-});
-
-$(document).ajaxComplete(function () {
+$(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
-});
+})

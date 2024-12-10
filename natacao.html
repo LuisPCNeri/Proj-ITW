@@ -130,8 +130,8 @@
                     </h2>
                 </div>
                 <div class="col-md-4">
-                    <label for="eventId">Escolha um Evento:</label>
-                        <select id="eventId" data-bind="options: events, optionsText: 'EventName', optionsValue: 'EventId', value: selectedEventId, event: { change: loadMatches }"></select>
+                    <label for="eventSelect" class="form-label">Escolha um Evento:</label>
+                    <select id="eventSelect" class="form-select" data-bind="options: events, optionsText: 'EventName', optionsValue: 'EventId', value: selectedEventId"></select>                </div>
                 </div>
             </div>
         </div>
@@ -175,12 +175,12 @@
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: visibleMatches">
+            <tbody data-bind="foreach: stages">
                 <tr>
-                    <td class="align-middle" data-bind="text:Name"></td>
+                    <td class="align-middle" data-bind="text:EventId"></td>
+                    <td class="align-middle" data-bind="text:EventName"></td>
+                    <td class="align-middle" data-bind="text:StageId"></td>
                     <td class="align-middle" data-bind="text:StageName"></td>
-                    <td class="align-middle" data-bind="text:Sex"></td>
-                    <td class="align-middle" data-bind="text:CountryName"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athletesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
                         <button class="btn btn-default btn-xs"><i class="fa fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
