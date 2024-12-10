@@ -26,6 +26,11 @@
     color: #ffffff;
 }
 
+.dark-theme .modal .modal-content{
+    background-color: #212529;
+    color: white;
+}
+
 .theme-switch {
 --toggle-size: 20px;
 /* the size is adjusted using font-size,
