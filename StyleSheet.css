@@ -81,7 +81,7 @@ main {
 }
     
 /* Responsividade para dropdown */
-.dropdown-menu {
+#droptorneio{
     border: 0;
     left: 50%;
     transform: translateX(-21%);
@@ -90,6 +90,11 @@ main {
     top: 0 !important;
     width: 130vh;
     background-color: rgba(0, 0, 0, 0); 
+}
+
+.dark-theme #droptabelas{
+    background-color: #212529;
+    color: white;
 }
 
 .dropdown-menu .container{

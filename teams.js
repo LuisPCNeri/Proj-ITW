@@ -1,14 +1,13 @@
-
 // ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Coaches');
-    self.displayName = 'Paris2024 Coaches List';
+    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Teams');
+    self.displayName = 'Paris2024 Teams List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
-    self.coaches = ko.observableArray([]);
+    self.teams = ko.observableArray([]);
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
@@ -45,18 +44,18 @@ var vm = function () {
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getCoaches...');
+        console.log('CALL: getTeams...');
         var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
-            self.coaches(data.Coaches);
+            self.teams(data.Teams);
             self.currentPage(data.CurrentPage);
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
             self.pagesize(data.PageSize)
             self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalCoaches);
+            self.totalRecords(data.TotalTeams);
             //self.SetFavourites();
         });
     };
