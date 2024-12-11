@@ -1,14 +1,13 @@
-
 // ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Coaches');
-    self.displayName = 'Paris2024 Coaches List';
+    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Coaches'); // Alterado para Coaches
+    self.displayName = 'Paris2024 Coaches List'; // Alterado para Coaches
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
-    self.coaches = ko.observableArray([]);
+    self.coaches = ko.observableArray([]); // Alterado para Coaches
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
@@ -43,6 +42,74 @@ var vm = function () {
         return list;
     };
 
+    // Função de busca para treinadores
+    self.search = function () {
+        console.log("searching...");
+        var searchQuery = document.getElementById('searchbar').value.toLowerCase();
+        if (!searchQuery) {
+            self.activate(1);
+            return;
+        }
+
+        var searchUrl = self.baseUri() + "/Search?q=" + searchQuery;
+        ajaxHelper(searchUrl, 'GET').done(function (data) {
+            if (data.length === 0) {
+                alert('No results found');
+                return;
+            }
+
+            // Certifique-se de que cada objeto tenha as propriedades necessárias para treinadores
+            var enrichedData = data.filter(function (coach) {
+                return coach.Name.toLowerCase().includes(searchQuery);
+            }).map(function (coach) {
+                return {
+                    Id: coach.Id,
+                    Name: coach.Name,
+                    Function: coach.Function || "",
+                    Sex: coach.Sex || ""
+                };
+            });
+
+            self.coaches(enrichedData); // Alterado para Coaches
+            self.totalRecords(enrichedData.length);
+            self.currentPage(1);
+        });
+    };
+
+    self.onEnter = function (event) {
+        if (event.keyCode === 13) {
+            self.search();
+        }
+        return true;
+    };
+
+    // Autocomplete configurado para treinadores
+    $.ui.autocomplete.filter = function (array, term) {
+        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+        return $.grep(array, function (value) {
+            return matcher.test(value.label || value.value || value);
+        });
+    };
+
+    $("#searchbar").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: self.baseUri() + "/Search?q=" + request.term,
+                dataType: "json",
+                success: function (data) {
+                    var coachNames = data.map(function (coach) {
+                        return coach.Name;
+                    });
+
+                    response($.grep(coachNames, function (name) {
+                        return name.toLowerCase().includes(request.term.toLowerCase());
+                    }));
+                }
+            });
+        },
+        minLength: 1
+    });
+
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getCoaches...');
@@ -50,14 +117,13 @@ var vm = function () {
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
-            self.coaches(data.Coaches);
+            self.coaches(data.Coaches); // Alterado para Coaches
             self.currentPage(data.CurrentPage);
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
-            self.pagesize(data.PageSize)
+            self.pagesize(data.PageSize);
             self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalCoaches);
-            //self.SetFavourites();
+            self.totalRecords(data.TotalCoaches); // Alterado para Coaches
         });
     };
 
@@ -78,11 +144,6 @@ var vm = function () {
         });
     }
 
-    function sleep(milliseconds) {
-        const start = Date.now();
-        while (Date.now() - start < milliseconds);
-    }
-
     function showLoading() {
         $("#myModal").modal('show', {
             backdrop: 'static',
@@ -90,9 +151,7 @@ var vm = function () {
         });
     }
     function hideLoading() {
-        $('#myModal').on('shown.bs.modal', function (e) {
-            $("#myModal").modal('hide');
-        })
+        $("#myModal").modal('hide');
     }
 
     function getUrlParameter(sParam) {
@@ -129,4 +188,4 @@ $(document).ready(function () {
 
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
-})
+});

@@ -42,6 +42,74 @@ var vm = function () {
         return list;
     };
 
+    self.search = function () {
+        console.log("searching...");
+        var searchQuery = document.getElementById('searchbar').value.toLowerCase();
+        if (!searchQuery) {
+            self.activate(1);
+            return;
+        }
+    
+        var searchUrl = self.baseUri() + "/Search?q=" + searchQuery;
+        ajaxHelper(searchUrl, 'GET').done(function (data) {
+            if (data.length === 0) {
+                alert('No results found');
+                return;
+            }
+    
+            // Alteração: Certifique-se de que cada objeto tenha as propriedades necessárias
+            var enrichedData = data.filter(function (team) {
+                return team.Name.toLowerCase().includes(searchQuery); // Alterado para "includes"
+            }).map(function (team) {
+                return {
+                    Id: team.Id,
+                    Name: team.Name,
+                    Sex: team.Sex || "",
+                    Country: team.Country || "",
+                };
+            });
+    
+            self.teams(enrichedData);
+            self.totalRecords(enrichedData.length);
+            self.currentPage(1);
+        });
+    };
+
+    self.onEnter = function (event) {
+        if (event.keyCode === 13) {
+            self.search();
+        }
+        return true;
+    };
+
+    // Autocomplete configurado
+    $.ui.autocomplete.filter = function (array, term) {
+        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+        return $.grep(array, function (value) {
+            return matcher.test(value.label || value.value || value);
+        });
+    };
+
+    $("#searchbar").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: self.baseUri() + "/Search?q=" + request.term,
+                dataType: "json",
+                success: function (data) {
+                    var teamNames = data.map(function (team) {
+                        return team.Name;
+                    });
+
+                    // Alteração: Use "includes" para verificar se o termo está contido em qualquer parte do nome
+                    response($.grep(teamNames, function (name) {
+                        return name.toLowerCase().includes(request.term.toLowerCase());
+                    }));
+                }
+            });
+        },
+        minLength: 1
+    });
+
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getTeams...');
