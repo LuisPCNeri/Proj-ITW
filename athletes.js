@@ -57,14 +57,16 @@ var vm = function () {
                 return;
             }
     
-            // Certifique-se de que cada objeto tenha uma propriedade BirthDate
-            var enrichedData = data.map(function (athlete) {
+            // Alteração: Certifique-se de que cada objeto tenha as propriedades necessárias
+            var enrichedData = data.filter(function (athlete) {
+                return athlete.Name.toLowerCase().includes(searchQuery); // Alterado para "includes"
+            }).map(function (athlete) {
                 return {
                     Id: athlete.Id,
                     Name: athlete.Name,
                     BirthDate: athlete.BirthDate || "",
                     BirthPlace: athlete.BirthPlace || "",
-                    Sex: athlete.Sex || "" // Adiciona 'N/A' caso BirthDate não exista
+                    Sex: athlete.Sex || ""
                 };
             });
     
@@ -73,7 +75,7 @@ var vm = function () {
             self.currentPage(1);
         });
     };
-                
+
     self.onEnter = function (event) {
         if (event.keyCode === 13) {
             self.search();
@@ -98,13 +100,17 @@ var vm = function () {
                     var athleteNames = data.map(function (athlete) {
                         return athlete.Name;
                     });
-                    response($.ui.autocomplete.filter(athleteNames, request.term));
+
+                    // Alteração: Use "includes" para verificar se o termo está contido em qualquer parte do nome
+                    response($.grep(athleteNames, function (name) {
+                        return name.toLowerCase().includes(request.term.toLowerCase());
+                    }));
                 }
             });
         },
         minLength: 1
     });
-
+    
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getAthletes...');
