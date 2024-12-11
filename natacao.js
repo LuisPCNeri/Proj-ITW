@@ -69,7 +69,7 @@ var vm = function () {
     }
 
     self.activate();
-    showLoading();
+    showLoading();    
 };
 
 $(document).ready(function () {
