@@ -1,13 +1,13 @@
-// JavaScript atualizado
+// Validação principal
 function valida() {
     let val = true;
 
     // Validação de texto para Nome e Sobrenome
-    validate_text(document.getElementById('name_inp'), /^[a-zA-Z\s]+$/);
-    validate_text(document.getElementById('last_name_inp'), /^[a-zA-Z\s]+$/);
+    val = validate_text(document.getElementById('name_inp'), /^[a-zA-Z\s]+$/, val);
+    val = validate_text(document.getElementById('last_name_inp'), /^[a-zA-Z\s]+$/, val);
 
     // Validação de endereço (mínimo 5 caracteres)
-    validate_text(document.getElementById('address_inp'), /.{5,}/);
+    val = validate_text(document.getElementById('address_inp'), /.{5,}/, val);
 
     // Validação de email
     const email = document.getElementById('email_inp');
@@ -36,22 +36,35 @@ function valida() {
         document.getElementById('successfull').classList.add('d-none');
         document.getElementById('unsuccessfull').classList.remove('d-none');
         return false;
-    } else if (val === true && localStorage.getItem('has_volunteered') === null) {
+    } else if (val) {
         document.getElementById('unsuccessfull').classList.add('d-none');
         document.getElementById('successfull').classList.remove('d-none');
     }
 
     localStorage.setItem('has_volunteered', 'true');
-
     return val;
 }
 
-function validate_text(obj, regex) {
+// Validação de texto reutilizável
+function validate_text(obj, regex, val) {
     if (!regex.test(obj.value)) {
         obj.classList.add('is-invalid');
-        val = false;
+        return false;
     } else {
         obj.classList.remove('is-invalid');
         obj.classList.add('is-valid');
+        return val;
     }
 }
+
+// Limpar validações e mensagens ao clicar no botão Reset
+document.querySelector('button[type="reset"]').addEventListener('click', function () {
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.classList.remove('is-invalid', 'is-valid');
+    });
+    document.getElementById('successfull').classList.add('d-none');
+    document.getElementById('unsuccessfull').classList.add('d-none');
+});
+
+

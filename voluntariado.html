@@ -17,6 +17,18 @@
             font-weight: bold;
             text-decoration: underline;
         }
+        .dark-theme input{
+            background-color: #212529;
+        }
+
+        .dark-theme textarea{
+            background-color: #212529;
+        }
+
+        #formContainer {
+            padding-bottom: 80px; /* Espaçamento inferior suficiente para a navbar */
+        }
+
     </style>
 </head>
 <body>
@@ -114,9 +126,9 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-5" id="formContainer">
             <!-- Formulário -->
-            <div class="col-md-6">
+            <div class="col-md-6" id="volunteerForm">
                 <form>
                     <div class="row mb-3">
                         <div class="col-12">
@@ -171,11 +183,6 @@
                             <button type="reset" class="btn btn-secondary w-100">Reset</button>
                         </div>
                     </div>
-                    <div class="row mt-3 d-none" id="unsuccessfull">
-                        <div class="col-12">
-                            <strong class="text-danger">You cannot volunteer twice.</strong>
-                        </div>
-                    </div>
                     <div class="row mt-3 d-none" id="successfull">
                         <div class="col-12">
                             <strong class="text-success">Your form has been submitted successfully!</strong>
@@ -187,7 +194,7 @@
             <!-- Texto Motivacional -->
             <div class="col-md-6 d-flex align-items-center">
                 <div>
-                    <h3>Seja parte da história nos Jogos Olímpicos Paris 2024!</h3>
+                    <h3 style="margin-bottom: 30px;">Faça parte da história dos Jogos Olímpicos Los Angeles 2028!</h3>
                     <p>
                         Junte-se à equipa de voluntários que fará deste evento inesquecível.
                         Como voluntário, você estará no coração da ação, conhecendo pessoas
@@ -201,7 +208,7 @@
                         - Contribuir para um dos maiores eventos do planeta.
                     </p>
                     <p>
-                        <strong>Inscreva-se agora e seja um dos protagonistas de Paris 2024!</strong>
+                        <strong>Inscreva-se agora e seja um dos protagonistas de Los Angeles 2028!</strong>
                     </p>
                 </div>
             </div>
@@ -215,7 +222,6 @@
             </div>
         </div>
     </nav>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="theme_switch.js"></script>
