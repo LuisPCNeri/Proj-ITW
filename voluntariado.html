@@ -37,6 +37,7 @@
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="medals.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
                         </ul>
                     <!-- Dropdown de torneios -->
                     <li class="nav-item dropdown">
@@ -113,69 +114,98 @@
                 </div>
             </div>
         </div>
-        <form class="container-fluid mt-5 ms-2">
-            <div class="row">
-                <div class="col-3">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="name_inp" id="name_inp">
-                        <label for="name_inp" class="form-label">Name</label>
-                        <p class="invalid-feedback text-danger">Invalid name</p>
+        <div class="row mt-5">
+            <!-- Formulário -->
+            <div class="col-md-6">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="name_inp" id="name_inp" placeholder="Name">
+                                <label for="name_inp">Name</label>
+                                <p class="invalid-feedback text-danger">Invalid name (only letters and spaces allowed)</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-3">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="last_name_inp" id="last_name_inp">
-                        <label for="last_name_inp" class="form-label">Last Name</label>
-                        <p class="invalid-feedback text-danger">Invalid name</p>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="last_name_inp" id="last_name_inp" placeholder="Last Name">
+                                <label for="last_name_inp">Last Name</label>
+                                <p class="invalid-feedback text-danger">Invalid last name (only letters and spaces allowed)</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="email" class="form-control" name="email_inp" id="email_inp">
-                        <label for="email_inp" class="form-label">Email</label>
-                        <p class="invalid-feedback text-danger">Invalid email</p>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" name="email_inp" id="email_inp" placeholder="Email">
+                                <label for="email_inp">Email</label>
+                                <p class="invalid-feedback text-danger">Invalid email format</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-6">
-                    <div class="form-floating">
-                        <textarea class="form-control" name="address_inp" id="address_inp"></textarea>
-                        <label for="address_inp" class="form-label">Address</label>
-                        <p class="invalid-feedback text-danger">Invalid address</p>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" name="address_inp" id="address_inp" placeholder="Address"></textarea>
+                                <label for="address_inp">Address</label>
+                                <p class="invalid-feedback text-danger">Invalid address (minimum 5 characters)</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="phone_inp" id="phone_inp">
-                        <label for="phone_inp" class="form-label">Phone Number</label>
-                        <p class="invalid-feedback text-danger">Invalid phone number</p>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="phone_inp" id="phone_inp" placeholder="Phone Number">
+                                <label for="phone_inp">Phone Number</label>
+                                <p class="invalid-feedback text-danger">Invalid phone number (must be 9 digits)</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary w-100" onclick="return valida()">Submit</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="reset" class="btn btn-secondary w-100">Reset</button>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-none" id="unsuccessfull">
+                        <div class="col-12">
+                            <strong class="text-danger">You cannot volunteer twice.</strong>
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-none" id="successfull">
+                        <div class="col-12">
+                            <strong class="text-success">Your form has been submitted successfully!</strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    
+            <!-- Texto Motivacional -->
+            <div class="col-md-6 d-flex align-items-center">
+                <div>
+                    <h3>Seja parte da história nos Jogos Olímpicos Paris 2024!</h3>
+                    <p>
+                        Junte-se à equipa de voluntários que fará deste evento inesquecível.
+                        Como voluntário, você estará no coração da ação, conhecendo pessoas
+                        do mundo inteiro, apoiando os maiores atletas e representando o espírito
+                        olímpico.
+                    </p>
+                    <p>
+                        <strong>Benefícios incríveis:</strong><br>
+                        - Experiência única e enriquecedora.<br>
+                        - Networking global.<br>
+                        - Contribuir para um dos maiores eventos do planeta.
+                    </p>
+                    <p>
+                        <strong>Inscreva-se agora e seja um dos protagonistas de Paris 2024!</strong>
+                    </p>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-3">
-                    <input type="button" class="btn btn-primary w-100" value="Submit" onclick="return valida()">
-                </div>
-                <div class="col-3">
-                    <input type="button" class="btn btn-secondary w-100" value="Reset">
-                </div>
-            </div>
-            <div class="row mt-3 d-none" id="unsuccessfull">
-                <div class="col-6">
-                    <strong class="text-danger">Can't volunteer twice</strong>
-                </div>
-            </div>
-            <div class="row mt-3 d-none" id="successfull">
-                <div class="col-6">
-                    <strong class="text-success">Form has been sent</strong>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
