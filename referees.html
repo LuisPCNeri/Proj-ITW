@@ -128,11 +128,12 @@
                         </a>
                         <ul class="dropdown-menu p-3" id="droptabelas">
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="athletes.html"><i class="fa far fa-user text-danger" style="margin-right: 5px;"></i>Atletas</a></li>
-                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="medals.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-bullseye text-danger" style="margin-right: 5px;"></i>Competições</a></li>
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Delegados e Árbitros</a></li>
                         </ul>
                     <!-- Dropdown de torneios -->
                     <li class="nav-item dropdown">
@@ -205,7 +206,7 @@
                 <div class="col-md-6 d-flex align-items-center">
                     <h2 class="d-flex align-items-center">
                         <i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>
-                        <span class="ms-2">Lista de Treinadores</span>
+                        <span class="ms-2">Lista de Delegados e Árbitros</span>
                     </h2>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
@@ -221,7 +222,7 @@
         <div class="row small">
             <p class="col-4 mr-auto pt-2">
                 <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                <span data-bind="html: 'Coaches: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                <span data-bind="html: 'Technical Officials: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
                         <!-- Ponto de alteração: Paginação corrigida -->
             <div class="col-8 my-0 pt-3">
@@ -253,19 +254,19 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Função</th>
                     <th scope="col">Sexo</th>
+                    <th scope="col">Data de Nascimento</th>
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: coaches">
+            <tbody data-bind="foreach: technical_officials">
                 <tr>
                     <td class="align-middle" data-bind="text: Id"></td>
                     <td class="align-middle" data-bind="text: Name"></td>
-                    <td class="align-middle" data-bind="text: Function ? Function : ''"></td>
-                    <td class="align-middle" data-bind="text: Sex ? Sex : ''"></td>
+                    <td class="align-middle" data-bind="text: Sex"></td>
+                    <td class="align-middle" data-bind="text: BirthDate"></td>
                     <td class="text-end">
-                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./coachesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./refereesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
                         <button class="btn btn-default btn-xs"><i class="fa fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
                     </td>
                 </tr>
@@ -299,6 +300,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="theme_switch.js"></script>
-    <script src="coaches.js"></script>
+    <script src="referees.js"></script>
 </body>
 </html>

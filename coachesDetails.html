@@ -17,6 +17,11 @@
             text-decoration: underline;
         }
 
+        .dark-theme #Desporto{
+            background-color: 121212;
+            color: white;
+        }
+
         /* Estilo do título e ícone */
         .light-theme h2 {
             white-space: nowrap;
@@ -57,6 +62,7 @@
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="medals.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-bullseye text-danger" style="margin-right: 5px;"></i>Competições</a></li>
                         </ul>
                     <!-- Dropdown de torneios -->
                     <li class="nav-item dropdown">
@@ -144,6 +150,14 @@
                     <div class="row border-bottom mx-0  my-1">
                         <div class="col-5">Sexo</div>
                         <div class="col-7" data-bind="text: Sex"></div>
+                    </div>
+                    <div class="row border-bottom mx-0  my-1">
+                        <div class="col-5">Desporto(s)</div>
+                        <div class="col-7">
+                            <ul class="list-unstyled" data-bind="foreach: Sports" id="Desporto">
+                                <li data-bind="text: $data"></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

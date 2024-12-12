@@ -3,22 +3,23 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Coaches/');
+    self.baseUri = ko.observable('http://192.168.160.58/Paris2024/api/Technical_officials/');
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
     self.Id = ko.observable('');
     self.Name = ko.observable('');
     self.Sex = ko.observable('');
+    self.BirthDate = ko.observable('');
+    self.Category = ko.observable('');
     self.Function = ko.observable('');
-    self.Country = ko.observable('');
-    self.Sports = ko.observableArray([]); 
-    self.Photo = ko.observable('');
+    self.Organisation = ko.observable('');
+    self.OrganisationLong = ko.observable('');
 
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getCoaches...');
+        console.log('CALL: getTechnical_Officials...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
@@ -27,15 +28,10 @@ var vm = function () {
             self.Name(data.Name);
             self.Sex(data.Sex);
             self.Function(data.Function);
-            self.Photo(data.Photo);
-            self.Country(data.Country);
-            if (data.Sports && Array.isArray(data.Sports)) {
-                self.Sports(data.Sports.map(function (sport) {
-                    return sport.Name; // Apenas os nomes
-                }));
-            } else {
-                self.Sports([]); // Garante que é um array vazio se não houver dados
-            }        
+            self.BirthDate(data.BirthDate);
+            self.Organisation(data.Organisation);
+            self.Category(data.Category);
+            self.OrganisationLong(data.OrganisationLong);
         });
     };
 
