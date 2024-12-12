@@ -31,17 +31,10 @@ function valida() {
         phone.classList.add('is-valid');
     }
 
-    // Verificar se já se inscreveu
-    if (localStorage.getItem('has_volunteered') === 'true') {
-        document.getElementById('successfull').classList.add('d-none');
-        document.getElementById('unsuccessfull').classList.remove('d-none');
-        return false;
-    } else if (val) {
-        document.getElementById('unsuccessfull').classList.add('d-none');
+    if (val) {
         document.getElementById('successfull').classList.remove('d-none');
     }
 
-    localStorage.setItem('has_volunteered', 'true');
     return val;
 }
 
