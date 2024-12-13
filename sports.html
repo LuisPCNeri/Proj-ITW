@@ -255,8 +255,10 @@
                     <td class="align-middle" data-bind="text:Competitions"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./sportsDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
-                        <button class="btn btn-default btn-outline-danger btn-xs btn-favourite" data-bind="click: () => $root.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }">
-                            <i data-bind="attr: {'class': $root.favourites().includes(Id)? 'fa fa-heart text-danger' : 'fa-regular fa-heart'}" class="fa-regular fa-heart" title="Selecione para adicionar aos favoritos"></i>
+                        <button class="btn btn-default btn-outline-danger btn-xs btn-favourite" 
+                        data-bind="click: () => $parent.toggleFavourite(Id), attr: { 'id': 'favourite_' + Id }">
+                        <i data-bind="css: $parent.favourites().some(fav => fav.sport === Id) ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart'" 
+                           class="fa-regular fa-heart" title="Selecione para adicionar aos favoritos"></i>
                         </button>
                     </td>
                 </tr>

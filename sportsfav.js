@@ -47,9 +47,9 @@ function getUrlParameter(sParam) {
 }
 
 //--- Page Events
-function activatePage() {
+function activatePage(page) {
     console.log('CALL: getAthletes...');
-    var composedUri = `http://192.168.160.58/Paris2024/api/Sports?page=1&pageSize=47`;
+    var composedUri = `http://192.168.160.58/Paris2024/api/Sports?page=${page}&pageSize=20`;
     ajaxHelper(composedUri, 'GET').done(function (data) {
         console.log(data);
         hideLoading();
@@ -57,39 +57,48 @@ function activatePage() {
     });
 }
 
-function removeFav(Id) {
-    console.log("remove fav");
-    $("#fav-" + Id).remove();
+function removeFav(teamId) {
+    console.log("Removendo equipa favorita com ID:", teamId);
+    $(`#fav-${teamId}`).remove(); // Remove a linha da tabela
 
-    let fav = JSON.parse(localStorage.fav || '[]');
+    // Carregar os favoritos do localStorage
+    let favourites = JSON.parse(localStorage.getItem("fav") || '[]');
 
-    const index = fav.indexOf(Id);
+    // Filtrar o array para remover o objeto com a chave `team` igual ao `teamId`
+    favourites = favourites.filter(fav => fav.sport !== teamId);
 
-    if (index !== -1) {
-        fav.splice(index, 1);
-    }
+    // Atualizar o localStorage com o array filtrado
+    localStorage.setItem("fav", JSON.stringify(favourites));
 
-    localStorage.setItem("fav", JSON.stringify(fav));
+    console.log("Favoritos atualizados no localStorage:", favourites);
 }
 
 $(document).ready(function () {
     showLoading();
 
-    let fav = JSON.parse(localStorage.fav || '[]');
-    console.log(fav);
+    // Carregar os favoritos do localStorage
+    let favourites = JSON.parse(localStorage.getItem("fav") || '[]');
+    console.log("Favoritos carregados:", favourites);
 
-    for (const Id of fav) {
-        console.log(Id);
+    // Iterar sobre os favoritos
+    for (const fav of favourites) {
+        // Verificar se a chave é `team`
+        if (fav.sport) {
+            console.log("Carregando Atleta favorita com ID:", fav.sport);
 
-        ajaxHelper(`http://192.168.160.58/Paris2024/api/Sports/${Id}`, 'GET').done(function (data) {
-            console.log(data);
-            if (localStorage.fav.length !== 0) {
+            // Fazer a chamada à API com o ID associado à chave `team`
+            ajaxHelper(`http://192.168.160.58/Paris2024/api/Sports/${fav.sport}`, 'GET').done(function (data) {
+                console.log("Dados da equipa:", data);
+
+                // Exibir a tabela somente se houver favoritos
                 $("#table-favourites").show();
                 $('#noadd').hide();
                 $('#nofav').hide();
+
+                // Adicionar a equipa à tabela
                 $("#table-favourites").append(
-                    `<tr id="fav-${Id}">
-                        <td class="align-middle">${Id}</td>
+                    `<tr id="fav-${fav.sport}">
+                        <td class="align-middle">${fav.sport}</td>
                         <td class="align-middle">${data.Name}</td>
                         <td class="align-middle"><img style="height: 75px; width: 75px;" src="${data.Pictogram}"></td>
                         <td class="align-middle">${data.Athletes.length}</td>
@@ -97,13 +106,15 @@ $(document).ready(function () {
                         <td class="align-middle">${data.Teams.length}</td>
                         <td class="align-middle">${data.Competitions.length}</td>
                         <td class="text-end align-middle">
-                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav(${Id})"><i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i></a>
+                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav('${fav.sport}')">
+                                <i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i>
+                            </a>
                         </td>
                     </tr>`
                 );
-            }
-        });
-        sleep(50);
+            });
+            sleep(50);
+        }
     }
 
     hideLoading();
@@ -112,3 +123,4 @@ $(document).ready(function () {
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
 });
+z   
