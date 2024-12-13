@@ -167,6 +167,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="torch.html"><i class="fa-solid fa-fire-flame-curved text-danger" style="margin-right: 5px;"></i>Rota da Tocha</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="shop.html"><i class="fa-solid fa-shop text-danger" style="margin-right: 5px;"></i>Loja</a></li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
                     <li class="nav-item"><div class="nav-link" type="button" data-bs-theme-value="light" aria-pressed="false"><i class="theme-icon fa fa-sun-o" title="Modo claro"></i></div></li>
@@ -271,7 +273,9 @@
                     <td class="align-middle" data-bind="text: Sex ? Sex : ''"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athletesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
-                        <button class="btn btn-default btn-xs"><i class="fa fa-heart" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
+                        <button class="btn btn-default btn-outline-danger btn-xs btn-favourite" data-bind="click: () => $root.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }">
+                            <i data-bind="attr: {'class': $root.favourites().includes(Id)? 'fa fa-heart text-danger' : 'fa-regular fa-heart'}" class="fa-regular fa-heart" title="Selecione para adicionar aos favoritos"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
