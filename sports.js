@@ -13,7 +13,28 @@ var vm = function () {
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
     self.totalPages = ko.observable(0);
-
+    self.toggleFavourite = function (id) {
+        if (self.favourites.indexOf(id) == -1) {
+            self.favourites.push(id);
+        }
+        else {
+            self.favourites.remove(id);
+        }
+        localStorage.setItem("fav", JSON.stringify(self.favourites()));
+    };
+    self.SetFavourites = function () {
+        let storage;
+        try {
+            storage = JSON.parse(localStorage.getItem("fav"));
+        }
+        catch (e) {
+            ;
+        }
+        if (Array.isArray(storage)) {
+            self.favourites(storage);
+        }
+    }
+    self.favourites = ko.observableArray([]);
     self.search = function () {
         console.log("searching...");
         var searchQuery = document.getElementById('searchbar').value.toLowerCase();
@@ -97,7 +118,7 @@ var vm = function () {
             self.currentPage(1);
             self.totalPages(1);
             self.totalRecords(47);
-            //self.SetFavourites();
+            self.SetFavourites();
         });
     };
 
