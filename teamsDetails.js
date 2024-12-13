@@ -7,11 +7,13 @@ var vm = function () {
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
-    self.Id = ko.observable('');
     self.Name = ko.observable('');
     self.Sex = ko.observable('');
-    self.Country = ko.observable('');
-    self.Sport_Codes = ko.observable('');
+    self.Athletes = ko.observableArray([]); 
+    self.Coaches = ko.observableArray([]); 
+    self.NOC = ko.observableArray([]); 
+    self.Sport = ko.observableArray([]); 
+
 
 
     //--- Page Events
@@ -21,11 +23,33 @@ var vm = function () {
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
-            self.Id(data.Id);
             self.Name(data.Name);
             self.Sex(data.Sex);
-            self.Country(data.Country);
-            self.Sport_Codes(data.Sport_Codes);
+            if (data.Athletes && Array.isArray(data.Athletes)) {
+                self.Athletes(data.Athletes.map(function (athlete) {
+                    return athlete.Name; // Apenas os nomes
+                }));
+            } else {
+                self.Athletes([]); // Garante que é um array vazio se não houver dados
+            }        
+            if (data.Coaches && Array.isArray(data.Coaches)) {
+                self.Coaches(data.Coaches.map(function (coach) {
+                    return coach.Name; // Apenas os nomes
+                }));
+            } else {
+                self.Coaches([]); // Garante que é um array vazio se não houver dados
+            }        
+            if (data.NOC && typeof data.NOC === 'object') {
+                self.NOC(data.NOC.Name ? [data.NOC.Name] : []); // Coloca o nome num array, se existir
+            } else {
+                self.NOC([]); // Garante que é um array vazio se não houver dados
+            }
+            
+            if (data.Sport && typeof data.Sport === 'object') {
+                self.Sport(data.Sport.Name ? [data.Sport.Name] : []); // Coloca o nome num array, se existir
+            } else {
+                self.Sport([]); // Garante que é um array vazio se não houver dados
+            }            
         });
     };
 
