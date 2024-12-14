@@ -42,6 +42,40 @@ var vm = function () {
         return list;
     };
 
+    self.toggleFavourite = function (id) {
+        // Verifica se o array já contém um objeto com chave `team` e valor `id`
+        const existingIndex = self.favourites().findIndex(item => item.competition === id);
+    
+        if (existingIndex === -1) {
+            // Se não existe, adiciona um novo objeto com chave `team` e o ID
+            self.favourites.push({ competition: id });
+        } else {
+            // Se já existe, remove o objeto do array
+            self.favourites.splice(existingIndex, 1);
+        }
+    
+        // Atualiza o localStorage com o array modificado
+        localStorage.setItem("fav", JSON.stringify(self.favourites()));
+    };
+    
+    self.SetFavourites = function () {
+        let storage;
+        try {
+            // Tenta carregar os favoritos armazenados no localStorage
+            storage = JSON.parse(localStorage.getItem("fav"));
+        } catch (e) {
+            console.error("Erro ao carregar favoritos:", e);
+        }
+    
+        // Se o dado armazenado for um array, inicializa o observable com ele
+        if (Array.isArray(storage)) {
+            self.favourites(storage);
+        }
+    };
+    
+    // Inicializa o observable como um array vazio
+    self.favourites = ko.observableArray([]);
+
     self.search = function () {
         console.log("searching...");
         var searchQuery = document.getElementById('searchbar').value.toLowerCase();
@@ -123,7 +157,7 @@ var vm = function () {
             self.pagesize(data.PageSize)
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalCompetitions);
-            //self.SetFavourites();
+            self.SetFavourites();
         });
     };
 
