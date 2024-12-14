@@ -13,11 +13,13 @@ var vm = function () {
         var composedUri = self.baseUri();
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
+            hideLoading();
             self.medals(data);
         });
     };
 
     //--- start ....
+    showLoading();
     self.activate(1);
     console.log("VM initialized!");
 }
@@ -30,12 +32,30 @@ function ajaxHelper(uri, method, data) {
         contentType: 'application/json',
         data: data ? JSON.stringify(data) : null,
         error: function (jqXHR, textStatus, errorThrown) {
+            hideLoading();
             alert("AJAX Call[" + uri + "] Fail...");
         }
     });
+}
+
+function showLoading() {
+    $("#myModal").modal('show', {
+        backdrop: 'static',
+        keyboard: false
+    });
+}
+function hideLoading() {
+    $('#myModal').on('shown.bs.modal', function (e) {
+        $("#myModal").modal('hide');
+    })
 }
 
 $('document').ready(function () {
     console.log("ready!");
     ko.applyBindings(new vm());
 });
+
+$(document).ajaxComplete(function (event, xhr, options) {
+    $("#myModal").modal('hide');
+});
+

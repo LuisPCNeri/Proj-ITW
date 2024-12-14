@@ -37,6 +37,36 @@
             align-items: center;/* Cor do texto do título */
         }
 
+        .dark-theme #searchbar{
+            background-color: #212529;
+        }
+
+        .dark-theme #searchbar::placeholder{
+            color: white;
+        }
+
+        .dark-theme .table {
+            background-color: #1c1c1c !important; /* Fundo da tabela */
+            color: white !important; /* Texto */
+            border: 1px solid #444 !important;
+        }
+
+        .dark-theme .table th, 
+        .dark-theme .table td {
+            background-color: #1c1c1c !important; /* Fundo das células */
+            border-color: #444 !important; /* Bordas */
+            color: white !important; /* Texto */
+        }
+
+        .dark-theme .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #2e2e2e !important; /* Linhas alternadas */
+        }
+
+        .dark-theme .table-secondary {
+            background-color: #333 !important; /* Fundo do cabeçalho */
+            color: white !important; /* Texto do cabeçalho */
+        }
+
         /* Campo de busca */
         .input-group {
             display: flex;
