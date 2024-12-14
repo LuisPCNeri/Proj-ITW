@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,18 +16,90 @@
             font-weight: bold;
             text-decoration: underline;
         }
-        .dark-theme input{
-            background-color: #212529;
+
+        .card {
+            width: 200px;
+            height: 280px;
+            background: #07182E;
+            position: relative;
+            display: flex;
+            place-content: center;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 20px;
         }
 
-        .dark-theme textarea{
-            background-color: #212529;
+        .card h5 {
+            z-index: 1;
+            color: white;
+            margin: 20px 0 0 0;
+            font-size: 18px;
         }
 
-        #formContainer {
-            padding-bottom: 80px; /* Espaçamento inferior suficiente para a navbar */
+        .number {
+            z-index: 1;
+            font-size: 0.9em;
+            color: white;
+            margin: 0 0 10px 0;
         }
 
+        .instagram-link {
+            color: white !important;
+            font-size: 1.5em;
+            text-decoration: none;
+            z-index: 1;
+        }
+
+        .instagram-link:hover {
+            color: #0d8ee9 !important;
+            z-index: 1;
+        }
+
+        .cards-container {
+            display: flex; /* Ativa o Flexbox */
+            justify-content: center; /* Alinha os cards no centro horizontal */
+            align-items: flex-start; /* Alinha os cards no topo vertical */
+            padding-top: 20px; /* Espaço entre o topo do container e os cards */
+            gap: 20px; /* Espaço entre os cards */
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+            height: 130%;
+            animation: rotBGimg 3s linear infinite;
+            transition: all 0.2s linear;
+        }
+
+        @keyframes rotBGimg {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            background: #07182E;
+            ;
+            inset: 5px;
+            border-radius: 15px;
+        } 
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            top: -10px;            
+            z-index: 1; /* Certifique-se de que a imagem fique visível */
+        } 
     </style>
 </head>
 <body>
@@ -84,10 +155,10 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="torch.html"><i class="fa-solid fa-fire-flame-curved text-danger" style="margin-right: 5px;"></i>Rota da Tocha</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="shop.html"><i class="fa-solid fa-shop text-info" style="margin-right: 5px;"></i>Loja</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>About us</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>About us</a></li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
                     <li class="nav-item"><div class="nav-link" type="button" data-bs-theme-value="light" aria-pressed="false"><i class="theme-icon fa fa-sun-o" title="Modo claro"></i></div></li>
@@ -120,104 +191,23 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid bannerTop">
-        <div class="border-bottom pt-4 pb-2 mb-3">
-            <div class="row flex">
-                <div class="col-md-8 d-flex align-items-center">
-                    <h2 class="d-flex align-items-center">
-                        <i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>
-                        <span class="ms-2">Voluntariado - Formulário de inscrição</span>
-                    </h2>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5" id="formContainer">
-            <!-- Formulário -->
-            <div class="col-md-6" id="volunteerForm">
-                <form>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" name="name_inp" id="name_inp" placeholder="Name">
-                                <label for="name_inp">Name</label>
-                                <p class="invalid-feedback text-danger">Invalid name (only letters and spaces allowed)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" name="last_name_inp" id="last_name_inp" placeholder="Last Name">
-                                <label for="last_name_inp">Last Name</label>
-                                <p class="invalid-feedback text-danger">Invalid last name (only letters and spaces allowed)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" name="email_inp" id="email_inp" placeholder="Email">
-                                <label for="email_inp">Email</label>
-                                <p class="invalid-feedback text-danger">Invalid email format</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control" name="address_inp" id="address_inp" placeholder="Address"></textarea>
-                                <label for="address_inp">Address</label>
-                                <p class="invalid-feedback text-danger">Invalid address (minimum 5 characters)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" name="phone_inp" id="phone_inp" placeholder="Phone Number">
-                                <label for="phone_inp">Phone Number</label>
-                                <p class="invalid-feedback text-danger">Invalid phone number (must be 9 digits)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary w-100" onclick="return valida()">Submit</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="reset" class="btn btn-secondary w-100">Reset</button>
-                        </div>
-                    </div>
-                    <div class="row mt-3 d-none" id="successfull">
-                        <div class="col-12">
-                            <strong class="text-success">Your form has been submitted successfully!</strong>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    
-            <!-- Texto Motivacional -->
-            <div class="col-md-6 d-flex align-items-center">
-                <div>
-                    <h3 style="margin-bottom: 30px;">Faça parte da história dos Jogos Olímpicos Los Angeles 2028!</h3>
-                    <p>
-                        Junte-se à equipa de voluntários que fará deste evento inesquecível.
-                        Como voluntário, você estará no coração da ação, conhecendo pessoas
-                        do mundo inteiro, apoiando os maiores atletas e representando o espírito
-                        olímpico.
-                    </p>
-                    <p>
-                        <strong>Benefícios incríveis:</strong><br>
-                        - Experiência única e enriquecedora.<br>
-                        - Networking global.<br>
-                        - Contribuir para um dos maiores eventos do planeta.
-                    </p>
-                    <p>
-                        <strong>Inscreva-se agora e seja um dos protagonistas de Los Angeles 2028!</strong>
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid bannerTop cards-container">
+        <div class="card">
+            <img src="Images/goncalo.jpg" alt="Foto de Gonçalo Figueiredo" class="profile-pic">
+            <h5>Gonçalo Figueiredo</h5>
+            <p class="number">Nº 125990</p>
+            <a href="https://instagram.com/goncalo_vila" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>        
+        <div class="card">
+            <img src="Images/luís.jpg" alt="Foto de Luís Correia" class="profile-pic">
+            <h5>Luís Correia</h5>
+            <p class="number">Nº 125990</p>
+            <a href="https://instagram.com/luis_pcneri" target="_blank" class="instagram-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>    
     </div>
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
@@ -230,6 +220,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="theme_switch.js"></script>
-    <script src="check_form.js"></script>
 </body>
 </html>
