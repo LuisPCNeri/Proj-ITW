@@ -12,6 +12,11 @@ main {
 .table{
     margin-bottom: 80px;
 }
+
+.btn-secondary{
+    color: white !important;
+}
+
 /* button default
 ---------------------------- */
 .btn-default {
