@@ -50,7 +50,7 @@
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="athletes.html"><i class="fa far fa-user text-danger" style="margin-right: 5px;"></i>Atletas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
-                                <li class="nav-item"><a class="nav-link" aria-current="page" href="medals.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="medalscountry.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-bullseye text-danger" style="margin-right: 5px;"></i>Competições</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="referees.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Delegados e Árbitros</a></li>
@@ -89,7 +89,7 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="shop.html"><i class="fa-solid fa-shop text-info" style="margin-right: 5px;"></i>Loja</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>About us</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>Sobre Nós</a></li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
                     <li class="nav-item"><div class="nav-link" type="button" data-bs-theme-value="light" aria-pressed="false"><i class="theme-icon fa fa-sun-o" title="Modo claro"></i></div></li>
@@ -141,8 +141,8 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" class="form-control" name="name_inp" id="name_inp" placeholder="Name">
-                                <label for="name_inp">Name</label>
-                                <p class="invalid-feedback text-danger">Invalid name (only letters and spaces allowed)</p>
+                                <label for="name_inp">Nome</label>
+                                <p class="invalid-feedback text-danger">Nome inválido (Apenas letras e espaços premitidos)</p>
                             </div>
                         </div>
                     </div>
@@ -150,8 +150,8 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" class="form-control" name="last_name_inp" id="last_name_inp" placeholder="Last Name">
-                                <label for="last_name_inp">Last Name</label>
-                                <p class="invalid-feedback text-danger">Invalid last name (only letters and spaces allowed)</p>
+                                <label for="last_name_inp">último Nome</label>
+                                <p class="invalid-feedback text-danger">Último Nome inválido (Apenas letras e espaços premitidos)</p>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                             <div class="form-floating">
                                 <input type="email" class="form-control" name="email_inp" id="email_inp" placeholder="Email">
                                 <label for="email_inp">Email</label>
-                                <p class="invalid-feedback text-danger">Invalid email format</p>
+                                <p class="invalid-feedback text-danger">Formato de email inválido</p>
                             </div>
                         </div>
                     </div>
@@ -168,8 +168,8 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <textarea class="form-control" name="address_inp" id="address_inp" placeholder="Address"></textarea>
-                                <label for="address_inp">Address</label>
-                                <p class="invalid-feedback text-danger">Invalid address (minimum 5 characters)</p>
+                                <label for="address_inp">Morada</label>
+                                <p class="invalid-feedback text-danger">Morada inválida (Mínimo de 5 caractéres)</p>
                             </div>
                         </div>
                     </div>
@@ -177,22 +177,22 @@
                         <div class="col-12">
                             <div class="form-floating">
                                 <input type="text" class="form-control" name="phone_inp" id="phone_inp" placeholder="Phone Number">
-                                <label for="phone_inp">Phone Number</label>
-                                <p class="invalid-feedback text-danger">Invalid phone number (must be 9 digits)</p>
+                                <label for="phone_inp">Número de Telemóvel</label>
+                                <p class="invalid-feedback text-danger">Número de Telemóvel inválido(tem que ter 9 dígitos)</p>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <button type="button" class="btn btn-primary w-100" onclick="return valida()">Submit</button>
+                            <button type="button" class="btn btn-primary w-100" onclick="return valida()">Submeter</button>
                         </div>
                         <div class="col-6">
-                            <button type="reset" class="btn btn-secondary w-100">Reset</button>
+                            <button type="reset" class="btn btn-secondary w-100">Limpar</button>
                         </div>
                     </div>
                     <div class="row mt-3 d-none" id="successfull">
                         <div class="col-12">
-                            <strong class="text-success">Your form has been submitted successfully!</strong>
+                            <strong class="text-success">A sua inscrição foi submetida com sucesso!</strong>
                         </div>
                     </div>
                 </form>

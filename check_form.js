@@ -3,9 +3,8 @@ function valida() {
     let val = true;
 
     // Validação de texto para Nome e Sobrenome
-    val = validate_text(document.getElementById('name_inp'), /^[a-zA-Z\s]+$/, val);
-    val = validate_text(document.getElementById('last_name_inp'), /^[a-zA-Z\s]+$/, val);
-
+    val = validate_text(document.getElementById('name_inp'), /^[a-zA-Zà-úÀ-ÚçÇ\s]+$/, val);    
+    val = validate_text(document.getElementById('last_name_inp'), /^[a-zA-Zà-úÀ-ÚçÇ\s]+$/, val);
     // Validação de endereço (mínimo 5 caracteres)
     val = validate_text(document.getElementById('address_inp'), /.{5,}/, val);
 

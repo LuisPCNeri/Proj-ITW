@@ -165,7 +165,7 @@
                                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="athletes.html"><i class="fa far fa-user text-danger" style="margin-right: 5px;"></i>Atletas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
-                                <li class="nav-item"><a class="nav-link" aria-current="page" href="medals.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="medalscountry.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-bullseye text-danger" style="margin-right: 5px;"></i>Competições</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="referees.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Delegados e Árbitros</a></li>
@@ -204,7 +204,7 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="shop.html"><i class="fa-solid fa-shop text-info" style="margin-right: 5px;"></i>Loja</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>About us</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>Sobre Nós</a></li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
                     <li class="nav-item"><div class="nav-link" type="button" data-bs-theme-value="light" aria-pressed="false"><i class="theme-icon fa fa-sun-o" title="Modo claro"></i></div></li>
@@ -251,7 +251,7 @@
                 <!-- Barra de busca alinhada à direita -->
                 <div class="col-md-6 d-flex justify-content-end">
                     <div class="input-group">
-                        <input id="searchbar" type="text" class="form-control" placeholder="Search athletes by name" data-bind="event: { keypress: onEnter }" style="margin-right: 5px;">
+                        <input id="searchbar" type="text" class="form-control" placeholder="Insira um nome" data-bind="event: { keypress: onEnter }" style="margin-right: 5px;">
                         <button class="btn btn-primary" type="button" data-bind="click: search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -261,8 +261,8 @@
         </div>
         <div class="row small">
             <p class="col-4 mr-auto pt-2">
-                <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                <span data-bind="html: 'Athletes: ' + fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                <span data-bind="html: 'Página: ' + currentPage() + ' de ' + totalPages()"></span><br />
+                <span data-bind="html: 'Atletas: ' + fromRecord() + '-' + toRecord() + ' de ' + totalRecords()"></span>
             </p>
                         <!-- Ponto de alteração: Paginação corrigida -->
             <div class="col-8 my-0 pt-3">
@@ -293,10 +293,10 @@
             <thead class="table-secondary">
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Birth Date</th>
-                    <th scope="col">Birth Place</th>
-                    <th scope="col">Sex</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data de Nascimento</th>
+                    <th scope="col">Local de Nascimento</th>
+                    <th scope="col">Sexo</th>
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
@@ -318,6 +318,7 @@
                 </tr>
             </tbody>
         </table>
+        <br>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
