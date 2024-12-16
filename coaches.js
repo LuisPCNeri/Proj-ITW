@@ -141,7 +141,7 @@ var vm = function () {
                 }
             });
         },
-        minLength: 1
+        minLength: 3
     });
 
     //--- Page Events
