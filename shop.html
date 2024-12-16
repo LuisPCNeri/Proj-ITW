@@ -367,10 +367,9 @@
             });
     
             if (total === 0) {
-                emptyCartRow.style.display = '';
                 checkoutButton.disabled = true;
             } else {
-                emptyCartRow.style.display = 'none';
+                
                 checkoutButton.disabled = false;
             }
     
@@ -424,6 +423,7 @@
     
             Object.keys(cart).forEach(productKey => delete cart[productKey]);
             updateCart();
+            document.getElementById('cart-total').innerHTML = '0.00€';
         });
     </script>
 </body>
