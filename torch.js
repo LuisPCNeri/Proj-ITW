@@ -14,6 +14,24 @@ var vm = function () {
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             self.records(data);
+
+            var map = L.map('map_area',{
+                inertia: false
+            }).setView([data[0].Lat, data[0].Lon], 5);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            for(k=0; k < data.length; k++){
+                if(k === 1){continue;}
+                marker = L.marker([data[k].Lat, data[k].Lon], {
+                    title: data[k].title,
+                });
+                marker.addTo(map);
+                marker.bindPopup(`${data[k].City}, \n ${data[k].Date_start} => ${data[k].Date_end}, \n ${data[k].Title}`)
+            }
         });
     };
 
