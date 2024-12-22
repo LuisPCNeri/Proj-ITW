@@ -12,6 +12,23 @@ var vm = function () {
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             self.records(data);
+
+            var map = L.map('map_area', {
+                inertia: false
+            }).setView([data[0].Lat, data[0].Lon], 10);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                minZoom: 2,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            for(k=0; k < data.length; k++){
+                if(!data[k].Lat || !data[k].Lon){ continue; }
+                marker = L.marker([data[k].Lat, data[k].Lon]);
+                marker.addTo(map);
+                marker.bindPopup(`${data[k].Name}, \n ${data[k].DateStart} => ${data[k].DateEnd}`);
+            }
         });
     };
 
