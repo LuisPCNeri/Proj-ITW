@@ -12,8 +12,31 @@ var vm = function () {
         console.log('CALL: getMedals...');
         var composedUri = self.baseUri();
         ajaxHelper(composedUri, 'GET').done(function (data) {
+            let a_name = [];
+            let a_total = [];
+
+            for(i=0; i < data.length; i++){
+                a_name.push(data[i].Name);
+                a_total.push(data[i].Medals);
+            }
+
             console.log(data);
             self.medals(data);
+
+            new Chart($('#chart'), {
+                type: 'bar',
+                data: {
+                    labels: a_name,
+                    datasets: [{
+                        label: 'Medalhas',
+                        data: a_total
+                    }]
+                },
+                options: {
+                    backgroundColor: 'rgba(210, 201, 201, 0.35)',
+                    hoverBackgroundColor: 'rgba(174, 211, 235, 0.81)'
+                }
+            });
         });
     };
 

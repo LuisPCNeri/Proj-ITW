@@ -7,13 +7,39 @@ var vm = function () {
     self.displayName = 'Paris 2024 Top 50 Medals';
     self.medals = ko.observableArray([]);
 
+    let c_name = [];
+    let c_total = [];
+
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getMedals...');
         var composedUri = self.baseUri();
         ajaxHelper(composedUri, 'GET').done(function (data) {
+            for(i=0; i < data.length; i++){
+                c_name.push(data[i].CountryName);
+                c_total.push(data[i].Total);
+            }
             console.log(data);
             self.medals(data);
+
+
+
+            new Chart($('#graph'),
+                {
+                    type: 'bar',
+                    data: {
+                        labels: c_name,
+                        datasets: [{
+                            label: 'Medalhas',
+                            data: c_total
+                        }]
+                    },
+                    options: {
+                        backgroundColor: 'rgba(210, 201, 201, 0.35)',
+                        hoverBackgroundColor: 'rgba(174, 211, 235, 0.81)'
+                    }
+                }
+            );
         });
     };
 

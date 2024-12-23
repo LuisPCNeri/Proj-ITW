@@ -130,6 +130,12 @@ main {
     border-radius: 5px;
 }
 
+.navbar .nav-item .active{
+    color: #8a8a8a !important;
+    font-weight: bold;
+    text-decoration: none;
+}
+
     
 @media (max-width: 1200px) {
     .dropdown-menu {
