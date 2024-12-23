@@ -55,7 +55,7 @@
                         <ul class="dropdown-menu p-3" id="droptabelas">
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="../athletes.html"><i class="fa far fa-user text-danger" style="margin-right: 5px;"></i>Atletas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="../coaches.html"><i class="fa far fa-user text-primary" style="margin-right: 5px;"></i>Treinadores</a></li>
-                                <li class="nav-item"><a class="nav-link" aria-current="page" href="../teams.html"><i class="fa fa-flag text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="../teams.html"><i class="fa-solid fa-users text-warning" style="margin-right: 5px;"></i>Equipas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="../medalscountry.html"><i class="fa-solid fa-medal text-info" style="margin-right: 5px;"></i>Medalhas</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="../sports.html"><i class="fa-solid fa-list text-success" style="margin-right: 5px;"></i>Modalidades</a></li>
                                 <li class="nav-item"><a class="nav-link" aria-current="page" href="../competitions.html"><i class="fa-solid fa-bullseye text-danger" style="margin-right: 5px;"></i>Competições</a></li>
@@ -130,15 +130,25 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <!--Search Bar-->
-        <div class="row justify-content-end">
-            <div class="col-md-6 d-flex justify-content-end mb-4">
-                <div class="input-group">
-                    <input id="search_bar" type="text" class="form-control" placeholder="Insira um nome" data-bind="" style="margin-right: 5px;">
-                    <button class="btn btn-primary" type="button" data-bind="click: search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+    <div class="container bannerTop">
+        <div class="border-bottom pt-4 pb-2 mb-3">
+            <div class="row d-flex align-items-center">
+                <!-- Título "Lista de Atletas" à esquerda -->
+                <div class="col-md-6 d-flex align-items-center">
+                    <h2 class="d-flex align-items-center">
+                        <i class="fa far fa-user text-danger" style="margin-right: 5px;"></i>
+                        <span class="ms-2">Lista de Atletas</span>
+                    </h2>
+                </div>
+                
+                <!-- Barra de busca alinhada à direita -->
+                <div class="col-md-6 d-flex justify-content-end">
+                    <div class="input-group">
+                        <input id="searchbar" type="text" class="form-control" placeholder="Insira um nome" style="margin-right: 5px;">
+                        <button class="btn btn-primary" type="button" data-bind="click: search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,10 +171,11 @@
                 </tr>
             </tbody>
         </table>
+        <div id="map_area" style="height: 700px;"></div>
+        <br>
+        <br>
+        <br>    
     </div>
-
-    <div id="map_area" style="height: 700px;"></div>
-    <br>
 
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
