@@ -39,7 +39,7 @@ var vm = function () {
 
     self.search = function () {
         console.log('Searching...');
-        let query = $('#search_bar').val().toLowerCase();
+        let query = $('#searchbar').val().toLowerCase();
         const search_uri = self.baseUri() + '/Search?q=' + query;
 
         if(!query){self.activate(1); return;}
