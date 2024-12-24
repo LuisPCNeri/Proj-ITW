@@ -48,7 +48,11 @@ var vm = function () {
     
         if (existingIndex === -1) {
             // Se não existe, adiciona um novo objeto com chave `team` e o ID
-            self.favourites.push({ competition: id });
+            self.favourites.push(
+                { 
+                    competition: id 
+
+                });
         } else {
             // Se já existe, remove o objeto do array
             self.favourites.splice(existingIndex, 1);

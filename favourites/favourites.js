@@ -4,7 +4,8 @@ var vm = function() {
 
     self.athletes = ko.observableArray();
     self.coaches = ko.observableArray();
-    self.baseURI = ko.observable('http://192.168.160.58/Paris2024/api/');
+    self.teams = ko.observableArray();
+    self.sports = ko.observableArray();
 
     self.activate = (node) => {
         console.log(node.value);
@@ -23,9 +24,11 @@ var vm = function() {
                         });
                     }
 
-                    sleep(80);
+                    sleep(100);
                 }
                 $('#table_coach').hide();
+                $('#table_t').hide();
+                $('#table_s').hide();
                 $('#table_a').show();
 
                 break;
@@ -35,20 +38,58 @@ var vm = function() {
                     if(item.coach){
                         ajaxHelper(`http://192.168.160.58/Paris2024/api/Coaches/${item.coach}`, 'GET').done( (data) => {
                             console.log('Getting coaches by id...');
-                            if(!self.coaches().includes(data)){
-                                self.coaches.push(data);
-                            }
+                            self.coaches.push(data);
                         });
                     }
 
-                    sleep(80);
+                    sleep(100);
                 }
                 $('#table_a').hide();
+                $('#table_t').hide();
+                $('#table_s').hide();
                 $('#table_coach').show();
 
                 break;
+            case 'Teams':
+                self.teams([]);
+                for(let item of fav_arr){
+                    if(item.team){
+                        ajaxHelper(`http://192.168.160.58/Paris2024/api/Teams/${item.team}`, 'GET').done( (data) => {
+                            console.log('Getting teams by id...');
+                            self.teams.push(data);
+                        });
+                    }
+
+                    sleep(100);
+                }
+
+                $('#table_a').hide();
+                $('#table_coach').hide();
+                $('#table_s').hide();
+                $('#table_t').show();
+
+                break;
+            case 'Sports':
+                self.sports([]);
+                for(let item of fav_arr){
+                    if(item.sport){
+                        ajaxHelper(`http://192.168.160.58/Paris2024/api/Sports/${item.sport}`, 'GET').done( (data) => {
+                            console.log('Getting Sports by id...');
+                            self.sports.push(data);
+                        });
+                    }
+
+                    sleep(150);
+                }
+
+                $('#table_a').hide();
+                $('#table_coach').hide();
+                $('#table_t').hide();
+                $('#table_s').show();
+
+                break;
+            default: '';
         }
-        //Chama a API respetiva ao valor do btn
     };
 };
 
