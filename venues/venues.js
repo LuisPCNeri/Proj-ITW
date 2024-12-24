@@ -35,6 +35,8 @@ var vm = function () {
                 marker_arr.push(marker);
             }
         });
+
+        console.log(self.records());
     };
 
     self.search = function () {

@@ -197,8 +197,9 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="torch.html"><i class="fa-solid fa-fire-flame-curved text-danger" style="margin-right: 5px;"></i>Rota da Tocha</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="../venues/venues.html"><i class="fa-solid fa-location-pin" style="margin-right: 5px;"></i>Arenas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="voluntariado.html"><i class="fa-solid fa-hand-holding-heart text-primary" style="margin-right: 5px;"></i>Voluntariado</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="../favourites/favourites.html"><i class="fa-solid fa-heart text-danger" style="margin-right: 5px;"></i>Favoritos</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="shop.html"><i class="fa-solid fa-shop text-info" style="margin-right: 5px;"></i>Loja</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="aboutus.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>Sobre Nós</a></li>
                 </ul>
@@ -307,7 +308,7 @@
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athletesDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
                         <button class="btn btn-default btn-outline-danger btn-xs btn-favourite" 
                         data-bind="click: () => $parent.toggleFavourite(Id), attr: { 'id': 'favourite_' + Id }">
-                        <i data-bind="css: $parent.favourites().some(fav => fav.athlete === Id) ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart'" 
+                        <i data-bind="css: $parent.favourites().some(fav => fav.Athletes === Id) ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart'" 
                            class="fa-regular fa-heart" title="Selecione para adicionar aos favoritos"></i>
                         </button>
                     </td>

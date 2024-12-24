@@ -43,11 +43,11 @@ var vm = function () {
     };
     self.toggleFavourite = function (id) {
         // Verifica se o array já contém um objeto com chave `team` e valor `id`
-        const existingIndex = self.favourites().findIndex(item => item.athlete === id);
+        const existingIndex = self.favourites().findIndex(item => item.Athletes === id);
     
         if (existingIndex === -1) {
             // Se não existe, adiciona um novo objeto com chave `team` e o ID
-            self.favourites.push({ athlete: id });
+            self.favourites.push({ Athletes: id });
         } else {
             // Se já existe, remove o objeto do array
             self.favourites.splice(existingIndex, 1);
