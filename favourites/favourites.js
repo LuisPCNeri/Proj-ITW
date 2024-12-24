@@ -24,7 +24,7 @@ var vm = function() {
                         });
                     }
 
-                    sleep(100);
+                    sleep(50);
                 }
                 $('#table_coach').hide();
                 $('#table_t').hide();
@@ -42,7 +42,7 @@ var vm = function() {
                         });
                     }
 
-                    sleep(100);
+                    sleep(50);
                 }
                 $('#table_a').hide();
                 $('#table_t').hide();
@@ -60,7 +60,7 @@ var vm = function() {
                         });
                     }
 
-                    sleep(100);
+                    sleep(50);
                 }
 
                 $('#table_a').hide();
@@ -79,7 +79,7 @@ var vm = function() {
                         });
                     }
 
-                    sleep(150);
+                    sleep(50);
                 }
 
                 $('#table_a').hide();
@@ -88,9 +88,22 @@ var vm = function() {
                 $('#table_s').show();
 
                 break;
-            default: '';
+            default: 
+
         }
     };
+
+    self.remove = (id) => {
+        console.log(id);
+        let fav_arr = JSON.parse(localStorage.getItem('fav'));
+    
+        for(let item of fav_arr){
+            if(item.Athletes === id || item.coach === id || item.team === id || item.sport === id){
+                fav_arr.splice(fav_arr.indexOf(item), 1);
+                localStorage.setItem('fav', JSON.stringify(fav_arr));
+            }
+        }
+    }
 };
 
 function ajaxHelper(uri, method, data) {
@@ -119,6 +132,10 @@ function hideLoading() {
 }
 
 $(document).ready(() => {
+    $('#table_a').hide();
+    $('#table_coach').hide();
+    $('#table_t').hide();
+    $('#table_s').hide();
     console.log("ready!");
     ko.applyBindings(new vm());
 });
