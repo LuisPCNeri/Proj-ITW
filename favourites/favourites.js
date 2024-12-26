@@ -93,16 +93,25 @@ var vm = function() {
         }
     };
 
-    self.remove = (id) => {
+    self.remove = function(id, type) {
         console.log(id);
         let fav_arr = JSON.parse(localStorage.getItem('fav'));
     
-        for(let item of fav_arr){
-            if(item.Athletes === id || item.coach === id || item.team === id || item.sport === id){
-                fav_arr.splice(fav_arr.indexOf(item), 1);
-                localStorage.setItem('fav', JSON.stringify(fav_arr));
-            }
+        // Localizar e remover o item correspondente no array
+        let indexToRemove = fav_arr.findIndex(item => 
+            (type === 'Athletes' && item.Athletes === id) ||
+            (type === 'Coaches' && item.coach === id) ||
+            (type === 'Teams' && item.team === id) ||
+            (type === 'Sports' && item.sport === id)
+        );
+    
+        if (indexToRemove !== -1) {
+            fav_arr.splice(indexToRemove, 1);
+            localStorage.setItem('fav', JSON.stringify(fav_arr));
         }
+    
+        // Atualizar a aba correspondente
+        self.activate({ value: type });
     }
 };
 
