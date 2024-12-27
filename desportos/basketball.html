@@ -48,8 +48,6 @@
     </style>  
 </head>
 <body>
-    <h1>BASQUETEBOL</h1>
-
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom light-theme">
         <div class="container-lg">
             <a class="navbar-brand" href="../paginainicial.html" title="Paris 2024"><img src="../Images/Paris2024.png" height="40" /></a>
@@ -101,19 +99,19 @@
                                     </div>
                                     <div class="col me-2">
                                         <a href="cycling_track.html">
-                                            <img src="../Images/ciclismo.png" alt="Tournament 4" title="Tournament 4" class="rounded shadow-sm">
+                                            <img src="../Images/ciclismo.png" alt="Ciclismo de Pista" title="Ciclismo de Pista" class="rounded shadow-sm">
                                             <span>Ciclismo de Pista</span>
                                         </a>
                                     </div>
                                     <div class="col me-2">
                                         <a href="football.html">
-                                            <img src="../Images/futebol.png" alt="Tournament 5" title="Tournament 5" class="rounded shadow-sm">
+                                            <img src="../Images/futebol.png" alt="Futebol" title="Futebol" class="rounded shadow-sm">
                                             <span>Futebol</span>
                                         </a>
                                     </div>
                                     <div class="col">
                                         <a href="natacao.html">
-                                            <img src="../Images/natacao.png" alt="Tournament 6" title="Tournament 6" class="rounded shadow-sm">
+                                            <img src="../Images/natacao.png" alt="Natação" title="Natação" class="rounded shadow-sm">
                                             <span>Natação</span>
                                         </a>
                                     </div>
@@ -159,6 +157,68 @@
         </div>
     </nav>
 
+    <div class="container bannerTop">
+        <div class="border-bottom pt-4 pb-2 mb-3">
+            <div class="row flex">
+                <div class="col-md-8 d-flex align-items-center">
+                    <h2 class="d-flex align-items-center">
+                        <i class="fa-solid fa-basketball text-success me-1"></i>
+                        <span class="ms-2">Basquetebol</span>
+                    </h2>
+                </div>
+                <div class="col-md-4 d-flex justify-content-end align-items-start">
+                    <div class="me-3">
+                        <label for="eventSelect" class="form-label">Escolha um Evento:</label>
+                        <select id="eventSelect" class="form-select" data-bind="options: events, optionsText: 'EventName', optionsValue: 'EventId', value: selectedEventId"></select>
+                    </div>
+                    <div>
+                        <label for="stageSelect" class="form-label" style="white-space: nowrap;">Escolha uma Fase:</label>
+                        <select id="stageSelect" class="form-select" data-bind="options: stages, optionsText: 'StageName', optionsValue: 'StageId', value: selectedStageId"></select>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row small">
+            <p class="col-4 mr-auto pt-2">
+            </p>
+                        <!-- Ponto de alteração: Paginação corrigida -->
+            <div class="col-8 my-0 pt-3">
+            </div>
+        </div>
+        <table class="table table-striped table-sm small">
+            <thead>
+                <tr>
+                    <th>Categoria - Fase</th>
+                    <th>Sexo</th>
+                    <th>Nome do participante</th>
+                    <th>País</th>                
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: results">
+                <tr>
+                    <td data-bind="text: Name"></td>
+                    <td data-bind="text: Sex"></td>
+                    <td data-bind="text: ParticipantName"></td>
+                    <td data-bind="text: CountryName"></td>                
+                </tr>
+            </tbody>
+        </table>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <img src="Images/Paris2024.png" height="30" style="margin-right: 10px;"/>Loading data...
+                        </h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <i class="fa fa-spin fa-3x fa-refresh"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
             <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2024/25</div>
@@ -172,6 +232,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="../theme_switch.js"></script>
-    <script src="football.js"></script>   
+    <script src="basketball.js"></script>   
 </body>
 </html>
