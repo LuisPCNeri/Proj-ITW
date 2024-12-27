@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ITW 2024/25 - Paris 2024 Futebol</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
@@ -11,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="../StyleSheet.css" rel="stylesheet" />
     <link href="../theme_switch.css" rel="stylesheet">
+
     <style>
         .dark-theme .table {
             background-color: #1c1c1c !important; /* Fundo da tabela */
@@ -43,9 +45,11 @@
             background-color: #212529;
             color: white;
         }
-    </style>      
+    </style>  
 </head>
-<body class="light-theme">
+<body>
+    <h1>BASQUETEBOL</h1>
+
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom light-theme">
         <div class="container-lg">
             <a class="navbar-brand" href="../paginainicial.html" title="Paris 2024"><img src="../Images/Paris2024.png" height="40" /></a>
@@ -83,7 +87,7 @@
                                             <span>Atletismo</span>
                                         </a>
                                     </div>
-                                    <div class="col me-2">
+                                    <div class="col me-2 active">
                                         <a href="basketball.html">
                                             <img src="../Images/basquetebol.png" alt="Basquetebol" title="Basquetebol" class="rounded shadow-sm">
                                             <span>Basquetebol</span>
@@ -101,7 +105,7 @@
                                             <span>Ciclismo de Pista</span>
                                         </a>
                                     </div>
-                                    <div class="col me-2 active">
+                                    <div class="col me-2">
                                         <a href="football.html">
                                             <img src="../Images/futebol.png" alt="Tournament 5" title="Tournament 5" class="rounded shadow-sm">
                                             <span>Futebol</span>
@@ -154,67 +158,7 @@
             </div>
         </div>
     </nav>
-    <div class="container bannerTop">
-        <div class="border-bottom pt-4 pb-2 mb-3">
-            <div class="row flex">
-                <div class="col-md-8 d-flex align-items-center">
-                    <h2 class="d-flex align-items-center">
-                        <i class="fa-regular fa-futbol text-success" style="margin-right: 5px;"></i>
-                        <span class="ms-2">Futebol</span>
-                    </h2>
-                </div>
-                <div class="col-md-4 d-flex justify-content-end align-items-start">
-                    <div class="me-3">
-                        <label for="eventSelect" class="form-label" style="white-space: nowrap;">Escolha um Evento:</label>
-                        <select id="eventSelect" class="form-select" data-bind="options: events, optionsText: 'EventName', optionsValue: 'EventId', value: selectedEventId"></select>
-                    </div>
-                    <div>
-                        <label for="stageSelect" class="form-label" style="white-space: nowrap;">Escolha uma Fase:</label>
-                        <select id="stageSelect" class="form-select" data-bind="options: stages, optionsText: 'StageName', optionsValue: 'StageId', value: selectedStageId"></select>
-                    </div>
-                </div>
-            </div>
-        </div>        
-        <div class="row small">
-            <p class="col-4 mr-auto pt-2">
-            </p>
-                        <!-- Ponto de alteração: Paginação corrigida -->
-            <div class="col-8 my-0 pt-3">
-            </div>
-        </div>
-        <table class="table table-striped table-sm small">
-            <thead>
-                <tr>
-                    <th>Categoria - Fase</th>
-                    <th>Sexo</th>
-                    <th>Nome do participante</th>
-                    <th>País</th>                
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: results">
-                <tr>
-                    <td data-bind="text: Name"></td>
-                    <td data-bind="text: Sex"></td>
-                    <td data-bind="text: ParticipantName"></td>
-                    <td data-bind="text: CountryName"></td>                
-                </tr>
-            </tbody>
-        </table>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            <img src="Images/Paris2024.png" height="30" style="margin-right: 10px;"/>Loading data...
-                        </h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <i class="fa fa-spin fa-3x fa-refresh"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     <nav class="navbar fixed-bottom bg-body-tertiary border-top light-theme">
         <div class="container small">
             <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2024/25</div>
@@ -223,10 +167,11 @@
             </div>
         </div>
     </nav>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="../theme_switch.js"></script>
-    <script src="football.js"></script>    
+    <script src="football.js"></script>   
 </body>
 </html>
