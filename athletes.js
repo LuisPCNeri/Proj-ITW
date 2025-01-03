@@ -13,6 +13,10 @@ var vm = function () {
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
+    self.isTableView = ko.observable(true); // Inicia com a tabela
+    self.toggleView = function () {
+        self.isTableView(!self.isTableView()); // Alterna entre tabela e cards
+    };
     self.previousPage = ko.computed(function () {
         return self.currentPage() * 1 - 1;
     }, self);
@@ -100,7 +104,8 @@ var vm = function () {
                     Name: athlete.Name,
                     BirthDate: athlete.BirthDate || "",
                     BirthPlace: athlete.BirthPlace || "",
-                    Sex: athlete.Sex || ""
+                    Sex: athlete.Sex || "",
+                    Photo: athlete.Photo || "default-photo.png"
                 };
             });
     
@@ -160,6 +165,7 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalAhletes);
             self.SetFavourites();
+            self.photo(data.Photo);
         });
     };
 

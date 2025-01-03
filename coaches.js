@@ -11,6 +11,10 @@ var vm = function () {
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
+    self.isTableView = ko.observable(true); // Inicia com a tabela
+    self.toggleView = function () {
+        self.isTableView(!self.isTableView()); // Alterna entre tabela e cards
+    };
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
     self.previousPage = ko.computed(function () {
@@ -100,7 +104,8 @@ var vm = function () {
                     Id: coach.Id,
                     Name: coach.Name,
                     Function: coach.Function || "",
-                    Sex: coach.Sex || ""
+                    Sex: coach.Sex || "",
+                    Photo: coach.Photo || "/Images/default-photo.png"
                 };
             });
 
@@ -159,6 +164,7 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalCoaches); // Alterado para Coaches
             self.SetFavourites();
+            self.photo(data.Photo);
         });
     };
 
